@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .cus-shadow-sm {
+    box-shadow: rgba(0, 0, 0, 0.148) 0px 3px 8px;
+  }
+
+  .cus-shadow-lg {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  .drop {
+    @apply bg-[#F4FBFF] absolute cus-shadow-lg w-[370px] h-[250px] z-50 right-[-8px] top-[41px] text-sm rounded-3xl duration-300 origin-top;
+  }
+
+  .delete-drop {
+    @apply bg-[#F4FBFF] absolute cus-shadow-lg w-[370px] h-[250px] z-50 right-[100px] top-[141px] text-sm rounded-3xl duration-300 origin-top;
+  }
+}
