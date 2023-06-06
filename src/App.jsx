@@ -7,9 +7,9 @@ import CreateContact from "./Components/CreateContact";
 import Guard from "./Components/Guard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import EditContactModel from "./Components/EditContactModel";
 import SingleContactInfo from "./Components/SingleContactInfo";
 import EditContact from "./Components/EditContact";
+import ChangePasswordModal from "./Components/ChangePasswordModel";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -38,7 +38,8 @@ const App = () => {
           <Route path="contactsTable" element={<ContactsTable />} />
           <Route path="createContact" element={<CreateContact />} />
           <Route path="editContact/:id" element={<EditContact />} />
-          <Route path="singleContactInfo/:id" toggleModal={toggleModal} modal={modal} element={<SingleContactInfo />} />
+          <Route path="changePasswordModal" element={<ChangePasswordModal />} />
+          <Route path="singleContactInfo/:id" element={<SingleContactInfo />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

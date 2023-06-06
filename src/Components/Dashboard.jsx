@@ -122,12 +122,6 @@ const Dashboard = ({ toggleSitebar, isOpen }) => {
                   <p className="font-semibold text-sm">Export</p>
                 </div>
               </li>
-              <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
-                  <AiFillPrinter className="text-secondary-500 text-xl" />
-                  <p className="font-semibold text-sm">Print</p>
-                </div>
-              </li>
             </ul>
             <div className="border-b-[1px] border-secondary-200"></div>
             <ul className="my-2">

@@ -8,8 +8,8 @@ const GoogleApps = ({ showApp }) => {
     <div
       className={
         showApp
-          ? "scale-y-1 z-50 duration-300 origin-top absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth scale-y-1"
-          : "scale-y-0 z-50 duration-300 origin-top absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth scale-y-0"
+          ? "scale-y-1 z-10 duration-300 origin-left absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth scale-y-1"
+          : "scale-y-0 z-10 duration-300 origin-left absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth scale-y-0"
       }
     >
       <div className="flex flex-wrap items-center justify-center gap-4">

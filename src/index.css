@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    user-select: none;
+}
+
 @layer components {
   .cus-shadow-sm {
     box-shadow: rgba(0, 0, 0, 0.148) 0px 3px 8px;
@@ -12,10 +16,10 @@
   }
 
   .drop {
-    @apply bg-[#F4FBFF] absolute cus-shadow-lg w-[370px] h-[250px] z-50 right-[-8px] top-[41px] text-sm rounded-3xl duration-300 origin-top;
+    @apply bg-[#F4FBFF] absolute cus-shadow-lg w-[370px] h-[250px] z-10 right-[-8px] top-[41px] text-sm rounded-3xl  duration-300 origin-top;
   }
 
-  .delete-drop {
-    @apply bg-[#F4FBFF] absolute cus-shadow-lg w-[370px] h-[250px] z-50 right-[100px] top-[141px] text-sm rounded-3xl duration-300 origin-top;
+  .change-password-drop {
+    @apply absolute bg-white cus-shadow-sm w-[220px] h-[83px] z-10 right-[200px] top-[60px] text-sm  duration-300 origin-top-right;
   }
 }

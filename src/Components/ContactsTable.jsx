@@ -14,8 +14,8 @@ import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addContacts, setSearchContact } from "../redux/services/contactSlice";
-import EditContactModel from "./EditContactModel";
-import DeleteDrop from "./DeleteDrop";
+import EditContactModel from "./ChangePasswordModel";
+import DeleteDrop from "./ChangePassword";
 
 const ContactTable = () => {
   const token = Cookies.get("token");

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchContact } from "../redux/services/contactSlice";
 import Logout from "./Logout";
 import GoogleApps from "./GoogleAppsScroll/GoogleApps";
+import ChangePassword from "./ChangePassword";
 
 
 const Nav = ({ toggleSitebar }) => {
@@ -21,17 +22,31 @@ const Nav = ({ toggleSitebar }) => {
   const searchContact = useSelector(
     (state) => state.contactSlice.searchContact
   );
-  console.log(searchContact);
+  // console.log(searchContact);
+
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   const [show, setShow] = useState(false);
   const handleToggle = () => {
     setShow(!show)
     setShowApp(false)
+    setShowSetting(false)
   };
 
   const [showApp, setShowApp] = useState(false);
   const handleToggleApp = () => {
     setShowApp(!showApp)
+    setShow(false)
+    setShowSetting(false)
+  };
+
+  const [showSetting, setShowSetting] = useState(false);
+  const handleToggleSetting = () => {
+    setShowSetting(!showSetting)
+    setShowApp(false)
     setShow(false)
   };
 
@@ -69,23 +84,27 @@ const Nav = ({ toggleSitebar }) => {
           />
           </div>
           <div className="flex justify-center items-center rounded-full space-x-6">
-            <div className="relative group">
+            <div className="relative group cursor-pointer">
               <BsQuestionCircle className="text-secondary-500 text-xl" />
-              <span className="hidden group-hover:block absolute top-6 -left-10 w-[100px] p-2 bg-secondary-500 text-white font-bold rounded scale-[70%]">
+              <span className="hidden z-20 group-hover:block absolute top-6 -left-10 w-[100px] p-2 bg-secondary-500 text-white font-bold rounded scale-[70%]">
                 <p>Help menu</p>
               </span>
             </div>
-            <div className="relative group">
+            <div onClick={handleToggleSetting} className="relative group cursor-pointer">
               <RiSettings5Line className="text-secondary-500 text-2xl" />
-              <span className="hidden group-hover:block absolute top-7 -left-12 w-[125px] p-2 bg-secondary-500 text-white font-bold rounded scale-[70%]">
+              <span className="hidden z-20 group-hover:block absolute top-7 -left-12 w-[125px] p-2 bg-secondary-500 text-white font-bold rounded scale-[70%]">
                 <p>Settings menu</p>
               </span>
             </div>
+            <ChangePassword showSetting={showSetting} toggleModal={toggleModal} modal={modal} />
           </div>
         </div>
         <div className="w-[7%] flex items-center space-x-4">
-          <div onClick={handleToggleApp} className="w-[40px] h-[40px] flex justify-center items-center rounded-full hover:bg-secondary-200">
+          <div onClick={handleToggleApp} className="relative group w-[40px] h-[40px] cursor-pointer flex justify-center items-center rounded-full hover:bg-secondary-200">
             <CgMenuGridO className="text-secondary-500 text-2xl" />
+            <span className="hidden z-10 group-hover:block absolute top-12 -left-10 w-[120px] p-2 bg-secondary-500 text-white font-bold rounded scale-[70%]">
+                <p>Google Apps</p>
+              </span>
           </div>
           <GoogleApps showApp={showApp} />
           <div className="relative group ">
