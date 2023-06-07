@@ -86,25 +86,39 @@ const ContactTable = () => {
         <tr
           // onClick={handleClick}
           key={contact?.id}
-          className="w-full group/item duration-200 hover:bg-secondary-300 py-3 px-1 p-4 cursor-pointer"
+          className="w-full group/item duration-200 hover:bg-secondary-300 py-3 px-1 p-4 cursor-pointer !mb"
         >
           <td className="flex  justify-start items-center space-x-4 px-3 py-3 h-[55px]">
+            <div className="hidden group-hover/item:block">
+              <span className="flex space-x-2 items-center ml-[15px]">
+                <svg
+                  width="19"
+                  height="19"
+                  viewBox="0 0 24 24"
+                  className="NSy2Hd cdByRd RTiFqe undefined"
+                >
+                  <path fill="none" d="M0 0h24v24H0V0z"></path>
+                  <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                </svg>
+                <input type="checkbox" />
+              </span>
+            </div>
             <div
               style={{ backgroundColor: randomColor }}
-              className="w-[40px] h-[40px] text-white text-2xl rounded-full flex justify-center items-center"
+              className="block group-hover/item:hidden w-[40px] h-[40px] text-white text-2xl rounded-full flex justify-center items-center"
             >
               <span className="">{contact.name.charAt().toUpperCase()}</span>
             </div>
-            <p>{contact.name}</p>
+            <p  className="group-hover/item:ms-[17px]">{contact.name}</p>
           </td>
           <td className="">{contact.email}</td>
           <td className="">{contact.phone}</td>
-          <td className="flex justify-between items-center">
-            <p>
+          <td className="flex justify-between">
+            <span>
               {contact.address.length > 25
                 ? `${contact.address.substring(0, 25)} . . .`
                 : contact.address}
-            </p>
+            </span>
             <div className="hidden group-hover/item:block">
               <div className="flex items-center space-x-5 duration-400 mr-[15px]">
                 <div className="relative group/edit">
