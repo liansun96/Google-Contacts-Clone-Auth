@@ -182,7 +182,7 @@ const ContactTable = () => {
               <th className="text-start font-semibold w-[23%]">Email</th>
               <th className="text-start font-semibold w-[14%]">Phone number</th>
               <th className="text-start font-semibold w-[40%]">Address</th>
-              <div className="flex items-center space-x-5 duration-400 mr-[15px] absolute right-0 top-4">
+              <div className="flex items-center space-x-5 duration-400 mr-[15px] absolute right-0 top-4 -z-[1005]">
                 <AiFillPrinter className="text-secondary-500 text-xl" />
                 <svg
                   width="20"
