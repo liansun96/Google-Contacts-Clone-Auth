@@ -1,20 +1,20 @@
 import Cookies from "js-cookie";
-import Logo from "../images/contact-logo.svg";
+import Logo from "../images/reset-password.png";
 import React, { useContext, useState } from "react";
 import { useUpdatePasswordMutation } from "../redux/api/authApi";
-import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { ThreeDots } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
 import { ToggleContext } from "../Context/ToggleProvider";
+import { TbCircleKey, TbCircleKeyFilled } from "react-icons/tb";
 
 const ChangePasswordModal = () => {
   const token = Cookies.get("token");
   const [updatePassword, { isLoading, error, isError }] =
-  useUpdatePasswordMutation(token);
+    useUpdatePasswordMutation(token);
   const nav = useNavigate();
 
-  const {toggleModal,modal} = useContext(ToggleContext)
+  const { toggleModal, modal } = useContext(ToggleContext);
 
   const [current_password, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
@@ -40,8 +40,11 @@ const ChangePasswordModal = () => {
       onClick={toggleModal}
       className="fixed inset-0 bg-black bg-opacity-25  backdrop-blur-sm flex justify-center items-center"
     >
-      <div onClick={(e)=>e.stopPropagation()} className="w-[450px] h-[500px] bg-white border border-[#d3d4d7] rounded-lg flex flex-col justify-center items-center space-y-8">
-        <div className="flex flex-col items-center space-y-3">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="w-[450px] h-[500px] bg-white border border-[#d3d4d7] rounded-lg flex flex-col justify-center items-center space-y-8"
+      >
+        <div className="flex justify-center items-center space-x-5">
           <img src={Logo} className="w-[15%]" alt="" />
           <h4 className="font-semibold text-xl">Change Password</h4>
         </div>
@@ -49,7 +52,7 @@ const ChangePasswordModal = () => {
         <form onSubmit={changePasswordHandler} className="mt-4 space-y-8">
           <div className="flex items-start">
             <div className="w-[10%]">
-              <RiLockPasswordLine className="text-secondary-500 text-xl mt-6" />
+              <TbCircleKey className="text-secondary-500 text-2xl mt-4" />
             </div>
             <div className="w-[90%] flex flex-col space-y-2 mt-3 relative">
               <input
@@ -70,7 +73,7 @@ const ChangePasswordModal = () => {
           </div>
           <div className="flex items-start">
             <div className="w-[10%]">
-              <RiLockPasswordFill className="text-secondary-500 text-xl mt-6" />
+              <TbCircleKeyFilled className="text-secondary-500 text-2xl mt-4" />
             </div>
             <div className="w-[90%] flex flex-col space-y-2 mt-3 relative">
               <input
@@ -95,7 +98,7 @@ const ChangePasswordModal = () => {
           </div>
           <div className="flex items-start">
             <div className="w-[10%]">
-              <RiLockPasswordFill className="text-secondary-500 text-xl mt-6" />
+              <TbCircleKeyFilled className="text-secondary-500 text-2xl mt-4" />
             </div>
             <div className="w-[90%] flex flex-col space-y-2 mt-3 relative">
               <input

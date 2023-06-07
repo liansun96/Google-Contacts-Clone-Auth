@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import userProfile from "../images/user-profile.png";
 import { HiOutlineMail, HiOutlineUser } from "react-icons/hi";
+import { IoMdCalendar } from "react-icons/io";
+import { FiMessageSquare } from "react-icons/fi";
 import { MdArrowBack, MdOutlinePhone } from "react-icons/md";
 import { TbAddressBook, TbCameraPlus } from "react-icons/tb";
 import Cookies from "js-cookie";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetSingleContactQuery } from "../redux/api/contactApi";
+import { BiVideo } from "react-icons/bi";
 
-const SingleContactInfo = ({ toggleModal, modal }) => {
+const SingleContactInfo = () => {
   const token = Cookies.get("token");
   const { id } = useParams();
   const { data: contact } = useGetSingleContactQuery({ id, token });
@@ -63,12 +65,28 @@ const SingleContactInfo = ({ toggleModal, modal }) => {
           </Link>
         </div>
       </div>
-      <div className="w-[95%] border-b-[1px] border-secondary-200 mt-3"></div>
-      <div className="w-[500px] border border-secondary-200 rounded-xl m-10 p-3">
-        <div className="flex items-start w-[50%] mt-2">
+      <div className="w-[95%] border-b-[1px] border-secondary-200 relative mt-3">
+        <div className="w-[300px] h-100px  flex justify-center items-center space-x-4 absolute left-[190px] -top-5">
+          <div className="w-10 h-10 bg-white rounded-full border border-primar-100 flex justify-center items-center">
+            <HiOutlineMail className="text-gray-400 text-xl" />
+          </div>
+          <div className="w-10 h-10 bg-white rounded-full border border-primar-100 flex justify-center items-center">
+            <IoMdCalendar className="text-gray-400 text-xl" />
+          </div>
+          <div className="w-10 h-10 bg-white rounded-full border border-primar-100 flex justify-center items-center">
+            <FiMessageSquare className="text-gray-400 text-xl" />
+          </div>
+          <div className="w-10 h-10 bg-white rounded-full border border-primar-100 flex justify-center items-center">
+            <BiVideo className="text-gray-400 text-xl" />
+          </div>
+        </div>
+      </div>
+
+      <div className="w-[550px] border border-secondary-200 rounded-xl m-10 p-5">
+        <div className="flex items-start w-[50%]">
           <h6 className="font-semibold text-lg">Contact Details</h6>
         </div>
-        <div className="flex items-start space-x-3 w-[50%] mt-2">
+        <div className="flex items-start space-x-3 w-[70%] mt-2">
           <div className="w-[10%]">
             <MdOutlinePhone className="text-secondary-500 text-xl mt-3" />
           </div>
@@ -76,7 +94,7 @@ const SingleContactInfo = ({ toggleModal, modal }) => {
             {phone}
           </div>
         </div>
-        <div className="flex items-start space-x-3 w-[50%] mt-2">
+        <div className="flex items-start space-x-3 w-[70%] mt-2">
           <div className="w-[10%]">
             <HiOutlineMail className="text-secondary-500 text-xl mt-3" />
           </div>
@@ -84,7 +102,7 @@ const SingleContactInfo = ({ toggleModal, modal }) => {
             {email}
           </div>
         </div>
-        <div className="flex items-start space-x-3 w-[50%] mt-2">
+        <div className="flex items-start space-x-3 w-[70%] mt-2">
           <div className="w-[10%]">
             <TbAddressBook className="text-secondary-500 text-2xl mt-3" />
           </div>
@@ -93,7 +111,6 @@ const SingleContactInfo = ({ toggleModal, modal }) => {
           </div>
         </div>
       </div>
-      {modal && <EditContactModel toggleModal={toggleModal} />}
     </div>
   );
 };

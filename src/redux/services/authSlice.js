@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
 const initialState = {
-  user: null,
-  token: null,
+  user: [],
+  token: [],
 };
 
 export const authSlice = createSlice({

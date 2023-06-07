@@ -1,3 +1,9 @@
+.active{
+  background-color: #e8f0fe!important;
+  color: #9173e9!important;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,15 +22,15 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
-  .active{
+  /* .active{
     @apply bg-primary-300 text-primary-100
-  }
+  } */
 
   .drop {
     @apply bg-[#F4FBFF] absolute cus-shadow-lg w-[370px] h-[250px] z-10 right-[-8px] top-[41px] text-sm rounded-3xl  duration-300 origin-top;
   }
 
   .change-password-drop {
-    @apply absolute bg-white cus-shadow-sm w-[220px] h-[83px] z-10 right-[200px] top-[60px] text-sm  duration-300 origin-top-right;
+    @apply absolute bg-white cus-shadow-sm w-[220px] h-[86px] z-10 right-[200px] top-[60px] text-sm  duration-300 origin-top-right;
   }
 }

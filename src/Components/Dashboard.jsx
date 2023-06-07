@@ -11,6 +11,7 @@ import Nav from "./Nav";
 import Cookies from "js-cookie";
 import { useGetContactQuery } from "../redux/api/contactApi";
 import { ToggleContext } from "../Context/ToggleProvider";
+import { AiFillPrinter } from "react-icons/ai";
 
 const Dashboard = () => {
   const token = Cookies.get("token");
@@ -49,8 +50,7 @@ const Dashboard = () => {
                 <NavLink
                   exact
                   to="contactsTable"
-                  activeClassName="bg-primary-300 text-primary-100"
-                  className="flex active justify-between items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
+                  className="flex justify-between items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
                 >
                   <div className="flex items-center space-x-6">
                     <HiOutlineUser className="text-xl" />
@@ -64,8 +64,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   to="favoriteCon"
-                  activeClassName="bg-primary-300 text-primary-100"
-                  className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                  className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
                 >
                   {/* <RiUser3Line className='text-xl'/> */}
                   <MdOutlineStarBorder className="text-xl " />
@@ -75,8 +74,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   to="frequently"
-                  activeClassName="bg-primary-300 text-primary-100"
-                  className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                  className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
                 >
                   <MdHistory className=" text-xl" />
                   <p className="font-semibold text-sm">Frequently</p>
@@ -86,13 +84,13 @@ const Dashboard = () => {
             <div className="border-b-[1px] border-secondary-200"></div>
             <ul className="my-2">
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
                   <MdOutlineKeyboardArrowUp className="text-secondary-500 text-xl" />
                   <p className="font-semibold text-sm">Labels</p>
                 </div>
               </li>
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
                   <HiPlus className="text-secondary-500 text-xl" />
                   <p className="font-semibold text-sm">Create label</p>
                 </div>
@@ -101,7 +99,7 @@ const Dashboard = () => {
             <div className="border-b-[1px] border-secondary-200"></div>
             <ul className="my-2">
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
                   <svg
                     width="20"
                     height="20"
@@ -117,7 +115,7 @@ const Dashboard = () => {
                 </div>
               </li>
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
                   <svg
                     width="20"
                     height="20"
@@ -133,11 +131,20 @@ const Dashboard = () => {
                   <p className="font-semibold text-sm">Export</p>
                 </div>
               </li>
+              <li>
+                <div
+                  onClick={() => window.print()}
+                  className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300"
+                >
+                  <AiFillPrinter className="text-secondary-500 text-xl" />
+                  <p className="font-semibold text-sm">Print</p>
+                </div>
+              </li>
             </ul>
             <div className="border-b-[1px] border-secondary-200"></div>
             <ul className="my-2">
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
                   <svg
                     width="20"
                     height="20"
@@ -154,7 +161,7 @@ const Dashboard = () => {
                 </div>
               </li>
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
                   <TfiTrash className="text-secondary-500 text-xl" />
                   <p className="font-semibold text-sm">Trash</p>
                 </div>

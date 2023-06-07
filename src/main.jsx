@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>
       <ToggleProvider>
-        <App />
+        <App className="font-nunito" />
       </ToggleProvider>
     </Provider>
   </BrowserRouter>

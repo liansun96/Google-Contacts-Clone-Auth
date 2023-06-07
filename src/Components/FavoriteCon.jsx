@@ -75,12 +75,12 @@ const FavoriteCon = () => {
                 Math.random() * colors.length
               );
               const randomColor = colors[randomColorIndex];
-              // const handleClick = () => {
-              //   navigate(`/singleContactInfo/${contact?.id}`);
-              // };
+              const handleClick = () => {
+                navigate(`/singleContactInfo/${contact?.id}`);
+              };
               return (
                 <tr
-                  // onClick={handleClick}
+                  onClick={handleClick}
                   key={contact?.id}
                   className="w-full group/item duration-200 hover:bg-secondary-300 py-3 px-1 p-4 cursor-pointer !mb"
                 >

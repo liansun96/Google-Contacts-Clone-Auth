@@ -3,10 +3,10 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import ChangePasswordModal from "./ChangePasswordModel";
 import { AiFillPrinter } from "react-icons/ai";
 import { ToggleContext } from "../Context/ToggleProvider";
-
-const ChangePassword = ({ showSetting}) => {
-
-  const {toggleModal,modal} = useContext(ToggleContext)
+import resetPasswordIcon from "../images/reset-password.svg";
+import { CgMoreVerticalO } from "react-icons/cg";
+const ChangePassword = ({ showSetting }) => {
+  const { toggleModal, modal } = useContext(ToggleContext);
 
   return (
     <div
@@ -20,13 +20,15 @@ const ChangePassword = ({ showSetting}) => {
         onClick={toggleModal}
         className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300"
       >
-        <RiLockPasswordLine className="text-secondary-500 text-xl" />
+        {/* <RiLockPasswordLine className="text-secondary-500 text-xl" /> */}
+        <img src={resetPasswordIcon} className="w-[22px] " alt="" />
         <p className="font-semibold text-sm">Change Password</p>
       </div>
-      <div onClick={()=>window.print()} className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300">
-        <AiFillPrinter className="text-secondary-500 text-xl" />
-        <p className="font-semibold text-sm">Print</p>
+      <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300">
+        <CgMoreVerticalO className=" ms-[1px] text-xl" />
+        <p className="font-semibold text-sm">More Settings</p>
       </div>
+
       {modal && <ChangePasswordModal />}
     </div>
   );

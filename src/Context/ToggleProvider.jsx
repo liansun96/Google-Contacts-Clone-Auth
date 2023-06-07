@@ -38,13 +38,13 @@ const ToggleProvider = ({ children }) => {
 
   //toggle favorite contact icon
   const [fav,setfav] = useState(true)  
-  const toggleFav = (x) => {
+  const toggleFav = (contact) => {
     if (fav) {
       setfav(!fav);
-      dispatch(addContact(x));
+      dispatch(addContact(contact));
     } else {
       setfav(!fav);
-      dispatch(removeContact(x));
+      dispatch(removeContact(contact));
     }
   };
 
