@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { HiOutlineUser, HiPlus } from "react-icons/hi";
 import {
   MdHistory,
@@ -6,21 +6,22 @@ import {
   MdOutlineStarBorder,
 } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
-import { AiFillPrinter } from "react-icons/ai";
 import { Link, Outlet } from "react-router-dom";
 import Nav from "./Nav";
 import Cookies from "js-cookie";
 import { useGetContactQuery } from "../redux/api/contactApi";
-import { useSelector } from "react-redux";
+import { ToggleContext } from "../Context/ToggleProvider";
 
-const Dashboard = ({ toggleSitebar, isOpen }) => {
+
+const Dashboard = () => {
   const token = Cookies.get("token");
   const { data } = useGetContactQuery({ token });
   console.log(data);
 
+  const {isOpen} = useContext(ToggleContext)
   return (
     <>
-      <Nav toggleSitebar={toggleSitebar} isOpen={isOpen} />
+      <Nav />
       <div className="flex mt-3">
         <div
           className={`${

@@ -1,24 +1,27 @@
 import Cookies from "js-cookie";
 import Logo from "../images/contact-Logo.svg";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useUpdatePasswordMutation } from "../redux/api/authApi";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";
 import { ThreeDots } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiHide, BiShow } from "react-icons/bi";
+import { ToggleContext } from "../Context/ToggleProvider";
 
-const ChangePasswordModal = ({ toggleModal }) => {
+const ChangePasswordModal = () => {
   const token = Cookies.get("token");
   const [updatePassword, { isLoading, error, isError }] =
-    useUpdatePasswordMutation(token);
-    const nav = useNavigate()
+  useUpdatePasswordMutation(token);
+  const nav = useNavigate();
+
+  const {toggleModal,modal} = useContext(ToggleContext)
 
   const [current_password, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
-  const [show,setShow] = useState(false)
-  const [show1,setShow1] = useState(false)
-  const [show2,setShow2] = useState(false)
+  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
 
   const changePasswordHandler = async (e) => {
     e.preventDefault();
@@ -34,10 +37,10 @@ const ChangePasswordModal = ({ toggleModal }) => {
 
   return (
     <div
-      // onClick={toggleModal}
+      onClick={toggleModal}
       className="fixed inset-0 bg-black bg-opacity-25  backdrop-blur-sm flex justify-center items-center"
     >
-      <div className="w-[450px] h-[500px] bg-white border border-[#d3d4d7] rounded-lg flex flex-col justify-center items-center space-y-8">
+      <div onClick={(e)=>e.stopPropagation()} className="w-[450px] h-[500px] bg-white border border-[#d3d4d7] rounded-lg flex flex-col justify-center items-center space-y-8">
         <div className="flex flex-col items-center space-y-3">
           <img src={Logo} className="w-[15%]" alt="" />
           <h4 className="font-semibold text-xl">Change Password</h4>
@@ -77,7 +80,11 @@ const ChangePasswordModal = ({ toggleModal }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="border-b-[1px] border-secondary-200 outline-none py-2 "
               />
-              <button className="" type="reset" onClick={() => setShow1(!show1)}>
+              <button
+                className=""
+                type="reset"
+                onClick={() => setShow1(!show1)}
+              >
                 {show1 ? (
                   <BiHide className="absolute cursor-pointer text-xl right-4 top-2 " />
                 ) : (
@@ -98,7 +105,11 @@ const ChangePasswordModal = ({ toggleModal }) => {
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 className="border-b-[1px] border-secondary-200 outline-none py-2 "
               />
-              <button className="" type="reset" onClick={() => setShow2(!show2)}>
+              <button
+                className=""
+                type="reset"
+                onClick={() => setShow2(!show2)}
+              >
                 {show2 ? (
                   <BiHide className="absolute cursor-pointer text-xl right-4 top-2 " />
                 ) : (
@@ -109,12 +120,12 @@ const ChangePasswordModal = ({ toggleModal }) => {
           </div>
 
           <div className="w-[360px] flex justify-between items-center">
-            <button onClick={toggleModal}>
+            <div onClick={toggleModal}>
               <p className="py-2 px-6 text-primary-100 font-semibold p-2 -ml-2 rounded hover:bg-secondary-200 duration-200 hover:text-primary-200 cursor-pointer">
                 Cancel
               </p>
-            </button>
-            
+            </div>
+
             <button
               disabled={isLoading && true}
               type="submit"

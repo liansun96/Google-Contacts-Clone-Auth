@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsQuestionCircle } from "react-icons/bs";
@@ -12,9 +12,10 @@ import { setSearchContact } from "../redux/services/contactSlice";
 import Logout from "./Logout";
 import GoogleApps from "./GoogleAppsScroll/GoogleApps";
 import ChangePassword from "./ChangePassword";
+import { ToggleContext } from "../Context/ToggleProvider";
 
 
-const Nav = ({ toggleSitebar }) => {
+const Nav = () => {
 
   const user = JSON.parse(Cookies.get("user"));
   const dispatch = useDispatch();
@@ -24,10 +25,9 @@ const Nav = ({ toggleSitebar }) => {
   );
   // console.log(searchContact);
 
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  const {toggleSitebar,isOpen} = useContext(ToggleContext)
+
+ 
 
   const [show, setShow] = useState(false);
   const handleToggle = () => {
@@ -96,7 +96,7 @@ const Nav = ({ toggleSitebar }) => {
                 <p>Settings menu</p>
               </span>
             </div>
-            <ChangePassword showSetting={showSetting} toggleModal={toggleModal} modal={modal} />
+            <ChangePassword showSetting={showSetting} />
           </div>
         </div>
         <div className="w-[7%] flex items-center space-x-4">

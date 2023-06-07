@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 import ChangePasswordModal from "./ChangePasswordModel";
 import { AiFillPrinter } from "react-icons/ai";
+import { ToggleContext } from "../Context/ToggleProvider";
 
-const ChangePassword = ({ showSetting, toggleModal, modal }) => {
+const ChangePassword = ({ showSetting}) => {
+
+  const {toggleModal,modal} = useContext(ToggleContext)
+
   return (
     <div
       className={
@@ -23,7 +27,7 @@ const ChangePassword = ({ showSetting, toggleModal, modal }) => {
         <AiFillPrinter className="text-secondary-500 text-xl" />
         <p className="font-semibold text-sm">Print</p>
       </div>
-      {modal && <ChangePasswordModal toggleModal={toggleModal} />}
+      {modal && <ChangePasswordModal />}
     </div>
   );
 };

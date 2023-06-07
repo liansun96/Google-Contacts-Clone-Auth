@@ -12,17 +12,6 @@ import EditContact from "./Components/EditContact";
 import ChangePasswordModal from "./Components/ChangePasswordModel";
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const toggleSitebar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
   return (
     <div>
       <Routes>
@@ -30,7 +19,7 @@ const App = () => {
           path="/"
           element={
             <Guard>
-              <Dashboard toggleSitebar={toggleSitebar} isOpen={isOpen} />
+              <Dashboard />
             </Guard>
           }
         >
