@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   MdOutlineStarBorder,
   MdOutlineModeEdit,
   MdDeleteOutline,
   MdInfoOutline,
+  MdStar,
 } from "react-icons/md";
 import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
 import {
@@ -14,13 +15,15 @@ import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addContacts, setSearchContact } from "../redux/services/contactSlice";
-import EditContactModel from "./ChangePasswordModel";
-import DeleteDrop from "./ChangePassword";
+import {
+  addContact,
+  removeContact,
+} from "../redux/services/favoritContactSlice";
+import { ToggleContext } from "../Context/ToggleProvider";
 
 const ContactTable = () => {
   const token = Cookies.get("token");
   const [num, setNum] = useState(1);
-  const [modal, setModal] = useState(false);
   const navigate = useNavigate();
 
   const { data } = useGetContactQuery({ token, num });
@@ -32,6 +35,8 @@ const ContactTable = () => {
     (state) => state.contactSlice.searchContact
   );
   console.log(contacts);
+
+  const { fav, toggleFav } = useContext(ToggleContext);
 
   const colors = [
     "#845EC2",
@@ -47,16 +52,6 @@ const ContactTable = () => {
   useEffect(() => {
     dispatch(addContacts(data?.contacts?.data));
   }, [data]);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
-  if (modal) {
-    document.body.classList.add("overflow-y-hidden");
-  } else {
-    document.body.classList.remove("overflow-y-hidden");
-  }
 
   const selectPageHandler = (i) => {
     setNum(i);
@@ -77,19 +72,22 @@ const ContactTable = () => {
       }
     })
     .map((contact) => {
-      const randomColorIndex = Math.floor(Math.random(2) * colors.length);
+      const randomColorIndex = Math.floor(Math.random() * colors.length);
       const randomColor = colors[randomColorIndex];
-      // const handleClick = () => {
-      //   navigate(`/singleContactInfo/${contact?.id}`);
-      // };
+      const handleClick = () => {
+        navigate(`/singleContactInfo/${contact?.id}`);
+      };
       return (
         <tr
-          // onClick={handleClick}
+          onClick={handleClick}
           key={contact?.id}
           className="w-full group/item duration-200 hover:bg-secondary-300 py-3 px-1 p-4 cursor-pointer !mb"
         >
           <td className="flex  justify-start items-center space-x-4 px-3 py-3 h-[55px]">
-            <div className="hidden group-hover/item:block">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="hidden group-hover/item:block"
+            >
               <span className="flex space-x-2 items-center ml-[15px]">
                 <svg
                   width="19"
@@ -109,20 +107,31 @@ const ContactTable = () => {
             >
               <span className="">{contact.name.charAt().toUpperCase()}</span>
             </div>
-            <p  className="group-hover/item:ms-[17px]">{contact.name}</p>
+            <p className="group-hover/item:ms-[17px]">{contact.name}</p>
           </td>
           <td className="">{contact.email}</td>
           <td className="">{contact.phone}</td>
           <td className="flex justify-between">
             <span>
-              {contact.address.length > 25
-                ? `${contact.address.substring(0, 25)} . . .`
-                : contact.address}
+              {contact?.address?.length > 25
+                ? `${contact?.address?.substring(0, 25)} . . .`
+                : contact?.address}
+              {/* {contact.address} */}
             </span>
-            <div className="hidden group-hover/item:block">
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="hidden group-hover/item:block"
+            >
               <div className="flex items-center space-x-5 duration-400 mr-[15px]">
-                <div className="relative group/edit">
-                  <MdOutlineStarBorder className="text-xl text-secondary-500" />
+                <div
+                  onClick={() => toggleFav(contact)}
+                  className="relative group/edit"
+                >
+                  {fav ? (
+                    <MdOutlineStarBorder className="text-xl text-secondary-500" />
+                  ) : (
+                    <MdStar className="text-xl text-secondary-500" />
+                  )}
                   <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
                     <p className="text-center">Star</p>
                   </span>
@@ -208,7 +217,6 @@ const ContactTable = () => {
           </button>
         </div>
       </div>
-      {modal && <EditContactModel toggleModal={toggleModal} />}
     </div>
   );
 };
