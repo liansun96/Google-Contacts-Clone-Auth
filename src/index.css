@@ -4,6 +4,7 @@
 
 *{
     user-select: none;
+
 }
 
 @layer components {
@@ -13,6 +14,10 @@
 
   .cus-shadow-lg {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  .active{
+    @apply bg-primary-300 text-primary-100
   }
 
   .drop {

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { RiUserAddLine } from "react-icons/ri";
 import { BsDot } from "react-icons/bs";
 
-const Logout = ({ show, user }) => {
+const Logout = ({ show, user ,randomColor }) => {
   const token = Cookies.get("token");
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -27,7 +27,7 @@ const Logout = ({ show, user }) => {
       <div className="w-[95%] h-[139px] mx-auto bg-white cus-shadow-sm rounded-[20px] mt-2">
         <div className="flex justify-start items-center ps-9 space-x-3 py-5  px-6">
           <div className="w-[20%]">
-            <div className="w-[45px] h-[45px]  ring-secondary-500 select-none cursor-pointer flex justify-center items-center rounded-full bg-yellow-700">
+            <div style={{ backgroundColor: randomColor }} className="w-[45px] h-[45px]  hover:ring-primary-100 select-none cursor-pointer flex justify-center items-center rounded-full">
               <span className="text-xl text-white">
                 {user?.name.charAt().toUpperCase()}
               </span>

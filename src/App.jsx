@@ -8,8 +8,14 @@ import Guard from "./Components/Guard";
 import SingleContactInfo from "./Components/SingleContactInfo";
 import EditContact from "./Components/EditContact";
 import ChangePasswordModal from "./Components/ChangePasswordModel";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
+import Frequently from "./Components/Frequently";
+import Favorite from "./Components/Favorite";
+import FavoriteCon from "./Components/FavoriteCon";
+
 
 const App = () => {
   return (
@@ -26,6 +32,8 @@ const App = () => {
           <Route index element={<ContactsTable />} />
           <Route path="contactsTable" element={<ContactsTable />} />
           <Route path="createContact" element={<CreateContact />} />
+          <Route path="frequently" element={<Frequently />} />
+          <Route path="favoriteCon" element={<FavoriteCon />} />
           <Route path="editContact/:id" element={<EditContact />} />
           <Route path="changePasswordModal" element={<ChangePasswordModal />} />
           <Route path="singleContactInfo/:id" element={<SingleContactInfo />} />

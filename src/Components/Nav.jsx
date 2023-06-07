@@ -25,7 +25,7 @@ const Nav = () => {
   );
   // console.log(searchContact);
 
-  const {toggleSitebar,isOpen} = useContext(ToggleContext)
+  const {toggleSitebar,isOpen ,randomColor} = useContext(ToggleContext)
 
  
 
@@ -108,10 +108,10 @@ const Nav = () => {
           </div>
           <GoogleApps showApp={showApp} />
           <div className="relative group ">
-            <div onClick={handleToggle} className="w-[35px] h-[35px] group-hover:ring-1 ring-secondary-500 select-none cursor-pointer flex justify-center items-center rounded-full bg-yellow-700 text-white">
+            <div onClick={handleToggle} style={{ backgroundColor: randomColor }} className="w-[35px] h-[35px] group-hover:ring-1 ring-primary-300 select-none cursor-pointer flex justify-center items-center rounded-full text-white">
               <span>{user?.name.charAt().toUpperCase()}</span>
             </div>
-            <Logout show={show} user={user} />
+            <Logout show={show} randomColor={randomColor} user={user} />
             <span className="-z-50 group-hover:block hidden absolute -right-2 top-11 text-start rounded  tracking-wider scale-[90%]  w-[200px] p-2 bg-secondary-500">
               <h6 className="text-sm font-bold text-white leading-tight">Google Account</h6>
               <p className="text-xs text-slate-300 font-semibold leading-tight">{user?.name}</p>

@@ -6,19 +6,18 @@ import {
   MdOutlineStarBorder,
 } from "react-icons/md";
 import { TfiTrash } from "react-icons/tfi";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import Nav from "./Nav";
 import Cookies from "js-cookie";
 import { useGetContactQuery } from "../redux/api/contactApi";
 import { ToggleContext } from "../Context/ToggleProvider";
-
 
 const Dashboard = () => {
   const token = Cookies.get("token");
   const { data } = useGetContactQuery({ token });
   console.log(data);
 
-  const {isOpen} = useContext(ToggleContext)
+  const { isOpen } = useContext(ToggleContext);
   return (
     <>
       <Nav />
@@ -46,31 +45,42 @@ const Dashboard = () => {
               </button>
             </Link>
             <ul className="my-2 mt-6">
-              <Link to="contactsTable">
-                <li>
-                  <div className="flex justify-between items-center px-6 py-[11px] space-x-6 bg-primary-300 text-primary-100 rounded-tr-[40px] rounded-br-[40px]">
-                    <div className="flex items-center space-x-6">
-                      <HiOutlineUser className="text-xl" />
-                      <p className="font-semibold text-sm">Contacts</p>
-                    </div>
-                    <span className="font-semibold text-sm">
-                      {data?.contacts.total}
-                    </span>
-                  </div>
-                </li>
-              </Link>
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
-                  <MdHistory className="text-secondary-500 text-xl" />
-                  <p className="font-semibold text-sm">Frequently</p>
-                </div>
+                <NavLink
+                  exact
+                  to="contactsTable"
+                  activeClassName="bg-primary-300 text-primary-100"
+                  className="flex active justify-between items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
+                >
+                  <div className="flex items-center space-x-6">
+                    <HiOutlineUser className="text-xl" />
+                    <p className="font-semibold text-sm">Contacts</p>
+                  </div>
+                  <span className="font-semibold text-sm">
+                    {data?.contacts.total}
+                  </span>
+                </NavLink>
               </li>
               <li>
-                <div className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                <NavLink
+                  to="favoriteCon"
+                  activeClassName="bg-primary-300 text-primary-100"
+                  className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                >
                   {/* <RiUser3Line className='text-xl'/> */}
-                  <MdOutlineStarBorder className="text-xl text-secondary-500" />
+                  <MdOutlineStarBorder className="text-xl " />
                   <p className="font-semibold text-sm">Favorite</p>
-                </div>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="frequently"
+                  activeClassName="bg-primary-300 text-primary-100"
+                  className="flex justify-start items-center px-6 py-[11px] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                >
+                  <MdHistory className=" text-xl" />
+                  <p className="font-semibold text-sm">Frequently</p>
+                </NavLink>
               </li>
             </ul>
             <div className="border-b-[1px] border-secondary-200"></div>
