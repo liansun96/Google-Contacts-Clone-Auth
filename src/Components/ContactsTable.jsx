@@ -114,6 +114,9 @@ const ContactTable = () => {
           <td className="flex justify-between">
             <span>
               {contact?.address?.length > 25
+                ? `${contact?.address.substring(0, 25)} . . .`
+                : contact?.address}
+
                 ? `${contact?.address?.substring(0, 25)} . . .`
                 : contact?.address}
               {/* {contact.address} */}

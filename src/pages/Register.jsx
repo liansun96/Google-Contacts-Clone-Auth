@@ -1,129 +1,175 @@
 import React, { useState } from "react";
-import Logo from "../images/contact-Logo.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { BiHide, BiShow } from "react-icons/bi";
+// import { useRegisterMutation } from "../redux/authApi";
+import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
+import BaseLayout from "../Components/BaseLayout";
 import { useRegisterMutation } from "../redux/api/authApi";
-import { ThreeDots } from "react-loader-spinner";
 
 const Register = () => {
-  const [register, { isLoading, isError, error }] = useRegisterMutation();
-  const nav = useNavigate();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [password_confirmation, setPasswordConfirmation] = useState("");
-  const [show, setShow] = useState(false);
-  const [show1, setShow1] = useState(false);
+  const [password_confirmation, setPasswordConfirm] = useState("");
+  const [register, { isLoading }] = useRegisterMutation();
+  const nav = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    const user = { name, email, password, password_confirmation };
-    const {data} = await register(user);
-    console.log(data, isError);
-    if (data?.success) nav("/login");    
+  const [invalidName, setInvalidName] = useState("");
+  const [invalidEmail, setInvalidEmail] = useState("");
+  const [invalidPassword, setInvalidPassword] = useState("");
+  const [invalidConfirm, setInvalidConfirm] = useState("");
+
+  const registerHandler = async (e) => {
+    try {
+      const user = { name, email, password, password_confirmation };
+      e.preventDefault();
+      const { data } = await register(user);
+      // console.log(data);
+      !data?.success && setInvalidName("invalid name");
+      !data?.success && setInvalidEmail("invalid email");
+      !data?.success && setInvalidPassword("invalid password");
+      !data?.success && setInvalidConfirm("invalid password confirmation");
+      data?.success && nav("/login");
+    } catch (error) {
+      console.log("error", error);
+    }
   };
-
   return (
-    <div>
-      <div className="min-h-[100vh] flex flex-col justify-center items-center">
-        <div className="w-[450px] h-[600px] border border-[#d3d4d7] rounded-lg flex flex-col justify-center items-center space-y-8">
-          <div className="flex flex-col items-center space-y-3">
-            <img src={Logo} className="w-[20%]" alt="" />
-            <h4 className="font-semibold text-xl">Register Account</h4>
-          </div>
-
-          <form onSubmit={handleRegister} className="mt-4 space-y-8">
-            <div className="group p-3 border border-slate-200 rounded relative">
-              <h2 className="absolute -top-6 translate-x-1 translate-y-1/2 bg-white text-sm text-slate-500 px-1">
-                Name
-              </h2>
-              <input
-                type="text"
-                className="focus:outline-none w-[335px] placeholder:none"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
+    <>
+      <BaseLayout>
+        <div className="flex flex-col">
+            <h2 className="text-center text-2xl text-gray-700 my-3 font-semibold">
+              Sign up
+            </h2>
+          <form
+            onSubmit={registerHandler}
+            className=" w-96 px-5 pt-0 flex flex-col "
+          >
+            <button className="text-blue-500 w-full flex items-center justify-center gap-3 bg-gray-50 hover:shadow-lg  font-medium rounded-lg px-5 py-2 text-center mt-4">
+              <span>
+                <img
+                  className="w-7"
+                  src="https://img.icons8.com/?size=1x&id=17949&format=png"
+                  alt=""
+                />
+              </span>
+              Login with Google
+            </button>
+            <div className="flex">
+            <p className="my-2 mx-auto  text-sm text-gray-500 font-bold">OR</p>
             </div>
-            <div className="group p-3 border border-slate-200 rounded relative">
-              <h2 className="absolute -top-6 translate-x-1 translate-y-1/2 bg-white text-sm text-slate-500 px-1">
-                Email
-              </h2>
+            <div className="mb-4">
               <input
-                type="text"
-                className="focus:outline-none w-[335px] placeholder:none"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setInvalidName("");
+                }}
+                type="name"
+                id="name"
+                className={
+                  name.length < 3 && invalidName
+                    ? "shadow-sm focus-within:outline-none bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg block w-full p-2.5 "
+                    : "shadow-sm focus-within:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                }
+                placeholder="Enter your name..."
               />
+              {name.length < 3 && (
+                <p className="text-red-500 text-sm">{invalidName}</p>
+              )}
             </div>
-            {/* <span className='text-primary-100 text-sm font-semibold cursor-pointer !mt-4'>Forgot email?</span> */}
-            <div className="group p-3 border border-slate-200 rounded relative">
-              <h2 className="absolute -top-6 translate-x-1 translate-y-1/2 bg-white text-sm text-slate-500 px-1">
-                Password
-              </h2>
+            <div className="mb-4">
               <input
-                type={show ? "text" : "password"}
-                className="focus:outline-none w-[335px] placeholder:none"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setInvalidEmail("");
+                }}
+                type="email"
+                id="email"
+                className={
+                  email.length <= 0 && invalidEmail
+                    ? "shadow-sm focus-within:outline-none bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg block w-full p-2.5 "
+                    : "shadow-sm focus-within:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                }
+                placeholder="Enter your email..."
               />
-              <button type="reset" onClick={() => setShow(!show)}>
-                {show ? (
-                  <BiHide className="absolute top-4 right-4 text-xl cursor-pointer" />
-                ) : (
-                  <BiShow className="absolute top-4 right-4 text-xl cursor-pointer" />
-                )}
-              </button>
+              {email.length <= 0 && (
+                <p className="text-red-500 text-sm">{invalidEmail}</p>
+              )}
             </div>
-            <div className="group p-3 border border-slate-200 rounded relative">
-              <h2 className="absolute -top-6 translate-x-1 translate-y-1/2 bg-white text-sm text-slate-500 px-1">
-                Password_confirmation
-              </h2>
+            <div className="mb-4 relative">
               <input
-                type={show1 ? "text" : "password"}
-                className="focus:outline-none w-[335px] placeholder:none"
-                value={password_confirmation}
-                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setInvalidPassword("");
+                }}
+                type={showPassword ? "text" : "password"}
+                className={
+                  password.length < 8 && invalidPassword
+                    ? "shadow-sm focus-within:outline-none bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg block w-full p-2.5 "
+                    : "shadow-sm focus-within:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                }
+                placeholder="Enter your password..."
               />
-              <button type="reset" onClick={() => setShow1(!show1)}>
-                {show1 ? (
-                  <BiHide className="absolute top-4 right-4 text-xl cursor-pointer" />
-                ) : (
-                  <BiShow className="absolute top-4 right-4 text-xl cursor-pointer" />
-                )}
-              </button>
-            </div>
-            <div className="w-[360px] flex justify-between items-center">
-              <Link to="/login">
-                <p className="py-2 px-6 text-primary-100 font-semibold p-2 -ml-2 rounded hover:bg-secondary-200 duration-200 hover:text-primary-200 cursor-pointer">
-                  Login
-                </p>
-              </Link>
-              <button
-                disabled={isLoading && true}
-                type="submit"
-                className="w-[80px] h-[40px] flex justify-center items-center text-sm font-semibold bg-primary-100 duration-200 hover:bg-primary-200 rounded"
+              {password.length < 8 && (
+                <p className="text-red-500 text-sm">{invalidPassword}</p>
+              )}
+              <label
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute top-0.5 right-0 px-5 py-3 cursor-pointer"
               >
-                {isLoading ? (
-                  <ThreeDots 
-                  height="40" 
-                  width="40" 
-                  radius="9"
-                  color="#fafafa" 
-                  ariaLabel="three-dots-loading"
-                  wrapperStyle={{}}
-                  wrapperClassName=""
-                  visible={true}
-                   />
-                ) : (
-                  <p className="text-white">Register</p>
-                )}
-              </button>
+                {!showPassword ? <RxEyeClosed /> : <RxEyeOpen />}
+              </label>
             </div>
+            <div className="mb-4 relative">
+              <input
+                onChange={(e) => {
+                  setPasswordConfirm(e.target.value);
+                  setInvalidConfirm("");
+                }}
+                type={showPasswordConfirm ? "text" : "password"}
+                className={
+                  invalidConfirm
+                    ? "shadow-sm focus-within:outline-none bg-gray-50 border border-red-500 text-red-500 text-sm rounded-lg block w-full p-2.5 "
+                    : "shadow-sm focus-within:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                }
+                placeholder="Confirm your password..."
+              />
+              {password_confirmation.length < 3 && (
+                <p className="text-red-500 text-sm">{invalidConfirm}</p>
+              )}
+              <label
+                onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                className="absolute top-0.5 right-0 px-5 py-3 cursor-pointer"
+              >
+                {!showPasswordConfirm ? <RxEyeClosed /> : <RxEyeOpen />}
+              </label>
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={
+                !isLoading
+                  ? " text-white w-full bg-blue-700 hover:bg-blue-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                  : " text-gray-300 w-full bg-gray-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              }
+            >
+              Sign up
+            </button >
           </form>
+          <div className="flex justify-center gap-3 my-5 p-5">
+            <p>Already have an account?</p>
+            <Link to={"/login"}>
+              <p className="text-blue-600">Log in</p>
+            </Link>
+          </div>
         </div>
-      </div>
-    </div>
+        <div className="w-96 hidden md:block">
+              {/* <img src="https://t3.ftcdn.net/jpg/01/28/18/14/240_F_128181482_m6jwZBkN5N17zPtliXUSxhOMbGvEAqBm.jpg" alt="" /> */}
+              <img src="https://img.freepik.com/free-vector/flat-design-illustration-customer-support_23-2148887720.jpg?size=626&ext=jpg&ga=GA1.1.1130450271.1685770899&semt=sph" alt="" />
+        </div>
+      </BaseLayout>
+    </>
   );
 };
 
