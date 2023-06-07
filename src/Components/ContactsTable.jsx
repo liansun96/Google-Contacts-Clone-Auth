@@ -109,15 +109,15 @@ const ContactTable = () => {
             >
               <span className="">{contact.name.charAt().toUpperCase()}</span>
             </div>
-            <p  className="group-hover/item:ms-[17px]">{contact.name}</p>
+            <p className="group-hover/item:ms-[17px]">{contact.name}</p>
           </td>
           <td className="">{contact.email}</td>
           <td className="">{contact.phone}</td>
           <td className="flex justify-between">
             <span>
-              {contact.address.length > 25
-                ? `${contact.address.substring(0, 25)} . . .`
-                : contact.address}
+              {contact?.address?.length > 25
+                ? `${contact?.address.substring(0, 25)} . . .`
+                : contact?.address}
             </span>
             <div className="hidden group-hover/item:block">
               <div className="flex items-center space-x-5 duration-400 mr-[15px]">

@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import Logo from "../images/contact-Logo.svg";
+import Logo from "../images/contact-logo.svg";
 import React, { useContext, useState } from "react";
 import { useUpdatePasswordMutation } from "../redux/api/authApi";
 import { RiLockPasswordFill, RiLockPasswordLine } from "react-icons/ri";

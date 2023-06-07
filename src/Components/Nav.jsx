@@ -67,12 +67,12 @@ const Nav = () => {
               <p className="ml-1">Main menu</p>
             </span>
           </div>
-          <img src={ContactLogo} className="w-[40px]" alt="" />
+          <img src={ContactLogo} className="w-[40px] hidden md:block" alt="" />
           <h1 className="text-2xl text-slate-600">Contacts</h1>
         </div>
         <div className="w-[70%] flex justify-between items-center">
           <div className="w-[68%] h-[48px] flex justify-start items-center space-x-4 rounded-lg bg-secondary-300">
-            <div className="w-[40px] h-[40px] flex justify-center items-center rounded-full hover:bg-secondary-200 ml-2">
+            <div className=" w-[40px] h-[40px] flex justify-center items-center rounded-full hover:bg-secondary-200 ml-2">
               <AiOutlineSearch className="text-secondary-500 text-2xl font-bold" />
             </div>
             <input
