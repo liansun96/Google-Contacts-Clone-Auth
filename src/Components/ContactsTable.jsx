@@ -92,7 +92,7 @@ const ContactTable = () => {
           className="w-full group/item duration-200 hover:bg-secondary-300 py-3 px-1 p-4 cursor-pointer !mb"
         >
           <td className="flex  justify-start items-center space-x-4 px-3 py-3 h-[55px]">
-            <div className="hidden group-hover/item:block">
+            <div onClick={(e) => e.stopPropagation()} className="hidden group-hover/item:block">
               <span className="flex space-x-2 items-center ml-[15px]">
                 <svg
                   width="19"
@@ -120,7 +120,7 @@ const ContactTable = () => {
           </td>
           <td className="">{contact?.email}</td>
           <td className="">{contact?.phone}</td>
-          <td className="flex justify-between">
+          <td className="">
             <span>
               {contact?.address?.length > 25
                 ? `${contact?.address?.substring(0, 25)} . . .`
@@ -128,8 +128,8 @@ const ContactTable = () => {
               {/* {contact.address} */}
             </span>
           </td>
-          <td>
-            <div className="hidden group-hover/item:block">
+          <td  onClick={(e) => e.stopPropagation()}>
+            <div  className="hidden group-hover/item:block">
               <div className="flex items-center space-x-5 duration-400 mr-[15px]">
                 <div
                   onClick={() => toggleFav(contact)}
@@ -177,7 +177,7 @@ const ContactTable = () => {
     });
 
   return (
-    <div className="w-[90%] p-x5">
+    <div className="w-[95%] p-x5">
       <div>
         <table className="w-full">
           <thead className="px-3">
