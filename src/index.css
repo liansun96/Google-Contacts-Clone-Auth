@@ -1,16 +1,17 @@
-.active{
-  background-color: #e8f0fe!important;
-  color: #9173e9!important;
+.active {
+  background-color: #e8f0fe !important;
+  color: #9173e9 !important;
 }
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    user-select: none;
-
+* {
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 @layer components {

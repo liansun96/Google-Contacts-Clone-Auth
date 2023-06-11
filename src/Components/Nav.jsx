@@ -49,7 +49,7 @@ const Nav = () => {
   return (
     <>
       <div className="flex justify-between items-center px-2 pt-2">
-        <div className="w-[15%] flex items-center space-x-2">
+        <div className="w-[25%] 2xl:w-[15%] xl:w-[15%] lg:w-[15%] md:w-[15%] 3xl:w-[15%] flex items-center space-x-2">
           <div className="relative group">
             <button
               onClick={toggleSitebar}
@@ -61,12 +61,12 @@ const Nav = () => {
               <p className="ml-1">Main menu</p>
             </span>
           </div>
-          <img src={ContactLogo} className="w-[40px] hidden md:block" alt="" />
-          <h1 className="text-2xl text-slate-600">Contacts</h1>
+          <img src={ContactLogo} className="w-[40px] " alt="" />
+          <h1 className="hidden  text-lg md:text-xl lg:text-2xl 2xl:text-2xl 3xl:text-2xl text-slate-600">Contacts</h1>
         </div>
-        <div className="w-[70%] flex justify-between items-center">
-          <div className="w-[68%] h-[48px] flex justify-start items-center space-x-4 rounded-lg bg-secondary-300">
-            <div className=" w-[40px] h-[40px] flex justify-center items-center rounded-full hover:bg-secondary-200 ml-2">
+        <div className="w-[40%] md:w-[50%] lg:w-[60%] xl:w-[70%] 2xl:w-[70%] 3xl:w-[70%] flex justify-end mx:justify-between lg:justify-between xl:justify-between 2xl:justify-between 3xl:justify-between items-center">
+          <div className="w-[50px] h-[50px] md-w-[68%] lg-w-[68%] xl:w-[68%] 2xl:w-[68%] 3xl:w-[68%] flex justify-center md:justify-start lg:justify-start xl:justify-start 2xl:justify-start 3xl:justify-start items-center lg:space-x-4 xl:space-x-4 2xl:space-x-4 3xl:space-x-4 rounded-full md:rounded-lg lg:rounded-lg xl:rounded-lg 2xl:rounded-lg 3xl:rounded-lg  bg-secondary-300">
+            <div className="w-[40px] h-[40px] flex justify-center items-center rounded-full hover:bg-secondary-200 md:ml-2 lg:ml-2 xl:ml-2 2xl:ml-2 3xl:ml-2">
               <AiOutlineSearch className="text-secondary-500 text-xl font-bold" />
             </div>
             <input
@@ -74,11 +74,11 @@ const Nav = () => {
               placeholder="Search"
               onChange={(e) => dispatch(setSearchContact(e.target.value))}
               value={searchContact}
-              className="outline-none w-[90%] bg-secondary-300"
+              className="outline-none w-[90%] bg-secondary-300 hidden md:block lg:block xl:block 2xl:block 3xl:block"
             />
           </div>
           <div className="flex justify-center items-center rounded-full space-x-6">
-            <div className="relative group cursor-pointer">
+            <div className="hidden md:block lg:block xl:block 2xl:block 3xl:block relative group cursor-pointer">
               <svg
                 width="20"
                 height="20"
@@ -114,7 +114,7 @@ const Nav = () => {
             <ChangePassword showSetting={showSetting} />
           </div>
         </div>
-        <div className="w-[7%] flex items-center space-x-4">
+        <div className="w-[30%] md:w-[7%] lg:w-[7%] xl:w-[7%] 2xl:w-[7%] 3xl:w-[7%] flex items-center space-x-4">
           <div
             onClick={handleToggleApp}
             className="relative group w-[40px] h-[40px] cursor-pointer flex justify-center items-center rounded-full hover:bg-secondary-200"
