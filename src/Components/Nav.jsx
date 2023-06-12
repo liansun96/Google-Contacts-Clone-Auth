@@ -62,7 +62,7 @@ const Nav = () => {
             </span>
           </div>
           <img src={ContactLogo} className="w-[40px] " alt="" />
-          <h1 className="hidden  text-lg md:text-xl lg:text-2xl 2xl:text-2xl 3xl:text-2xl text-slate-600">Contacts</h1>
+          <h1 className="hidden md:block  text-lg md:text-xl lg:text-2xl 2xl:text-2xl 3xl:text-2xl text-slate-600">Contacts</h1>
         </div>
         <div className="w-[40%] md:w-[50%] lg:w-[60%] xl:w-[70%] 2xl:w-[70%] 3xl:w-[70%] flex justify-end mx:justify-between lg:justify-between xl:justify-between 2xl:justify-between 3xl:justify-between items-center">
           <div className="w-[50px] h-[50px] md-w-[68%] lg-w-[68%] xl:w-[68%] 2xl:w-[68%] 3xl:w-[68%] flex justify-center md:justify-start lg:justify-start xl:justify-start 2xl:justify-start 3xl:justify-start items-center lg:space-x-4 xl:space-x-4 2xl:space-x-4 3xl:space-x-4 rounded-full md:rounded-lg lg:rounded-lg xl:rounded-lg 2xl:rounded-lg 3xl:rounded-lg  bg-secondary-300">

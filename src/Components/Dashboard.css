@@ -1,0 +1,5 @@
+@media screen and (max-width:600px) {
+    .mobile-nav{
+        @apply fixed top-[0px] bg-white z-[1100] w-[300px] h-screen ;
+    }
+}

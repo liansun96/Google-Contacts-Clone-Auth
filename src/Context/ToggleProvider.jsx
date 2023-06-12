@@ -24,7 +24,7 @@ const ToggleProvider = ({ children }) => {
       const randomColor = colors[randomColorIndex];
 
   //sitebar toggler
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const toggleSitebar = () => {
     setIsOpen(!isOpen);
   };
@@ -48,7 +48,7 @@ const ToggleProvider = ({ children }) => {
     }
   };
 
-  const value = { isOpen, toggleSitebar, modal, toggleModal ,randomColor ,fav ,toggleFav };
+  const value = { isOpen, setIsOpen, toggleSitebar, modal, toggleModal ,randomColor ,fav ,toggleFav };
 
   return (
     <ToggleContext.Provider value={value}>{children}</ToggleContext.Provider>

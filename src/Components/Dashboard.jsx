@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
+import ContactLogo from "../images/contact-logo.svg";
 import { HiOutlineUser, HiPlus } from "react-icons/hi";
 import {
   MdHistory,
+  MdOutlineCancel,
   MdOutlineKeyboardArrowUp,
   MdOutlineStarBorder,
 } from "react-icons/md";
@@ -11,46 +13,74 @@ import Nav from "./Nav";
 import Cookies from "js-cookie";
 import { useGetContactQuery } from "../redux/api/contactApi";
 import { ToggleContext } from "../Context/ToggleProvider";
-import { AiFillPrinter } from "react-icons/ai";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const token = Cookies.get("token");
   const { data } = useGetContactQuery({ token });
   console.log(data);
 
-  const { isOpen } = useContext(ToggleContext);
+  const { isOpen, setIsOpen } = useContext(ToggleContext);
   return (
     <>
       <Nav />
+      <Link to="createContact">
+        <button className="fixed bottom-16 right-10 md:hidden group flex items-center space-x-4 py-3 px-3 rounded-full duration-300 cus-shadow-sm hover:cus-shadow-lg hover:duration-200">
+          <div className="">
+            <svg width="36" height="36" viewBox="0 0 36 36">
+              <path fill="#34A853" d="M16 16v14h4V20z"></path>
+              <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
+              <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
+              <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
+              <path fill="none" d="M0 0h36v36H0z"></path>
+            </svg>
+          </div>
+        </button>
+      </Link>
       <div className="flex mt-3">
         <div
           className={`${
-            isOpen ? "w-[350px] block" : "w-[0px]  -translate-x-[500px]"
-          } transform duration-700`}
+            isOpen
+              ? "w-[0px] mobile-nav  -translate-x-[500px]"
+              : "w-full md:w-[330px] block mobile-nav"
+          } transform duration-700 `}
         >
-          <div className="w-[90%]">
+          <div className="w-[90%] relative">
             <Link to="createContact">
-              <button className="group flex items-center space-x-4 py-2 px-4 rounded-[40px] duration-300 cus-shadow-sm hover:cus-shadow-lg hover:duration-200">
-                <div className="">
-                  <svg width="36" height="36" viewBox="0 0 36 36">
-                    <path fill="#34A853" d="M16 16v14h4V20z"></path>
-                    <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
-                    <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
-                    <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
-                    <path fill="none" d="M0 0h36v36H0z"></path>
-                  </svg>
-                </div>
-                <h6 className="duration-300 group-hover:text-primary-200">
-                  Create contact
-                </h6>
-              </button>
+              <div className="hidden md:block">
+                <button className="group  flex items-center space-x-4 py-2 px-4 rounded-[40px] duration-300 cus-shadow-sm hover:cus-shadow-lg hover:duration-200">
+                  <div className="">
+                    <svg width="36" height="36" viewBox="0 0 36 36">
+                      <path fill="#34A853" d="M16 16v14h4V20z"></path>
+                      <path fill="#4285F4" d="M30 16H20l-4 4h14z"></path>
+                      <path fill="#FBBC05" d="M6 16v4h10l4-4z"></path>
+                      <path fill="#EA4335" d="M20 16V6h-4v14z"></path>
+                      <path fill="none" d="M0 0h36v36H0z"></path>
+                    </svg>
+                  </div>
+                  <h6 className="duration-300 group-hover:text-primary-200">
+                    Create contact
+                  </h6>
+                </button>
+              </div>
             </Link>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="absolute right-0 top-2 block md:hidden"
+            >
+              <MdOutlineCancel className="text-secondary-500 text-2xl"/>
+            </button>
+            <div className="flex justify-start items-center ms-4 space-x-6 mt-4 blcok md:hidden">
+              <img src={ContactLogo} className="w-[40px] " alt="" />
+              <p className="text-secondary-500 text-4xl">Contacts</p>
+            </div>
             <ul className="my-2 mt-6">
               <li>
                 <NavLink
+                  // onClick={()=>setIsOpen(true)}
                   exact
                   to="contactsTable"
-                  className="flex justify-between items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
+                  className="w-[350px] md:w-[250px] flex justify-between items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
                 >
                   <div className="flex items-center space-x-6">
                     <HiOutlineUser className="text-xl" />
@@ -64,7 +94,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   to="favoriteCon"
-                  className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                  className="w-[350px] md:w-[250px] flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
                 >
                   {/* <RiUser3Line className='text-xl'/> */}
                   <MdOutlineStarBorder className="text-xl " />
@@ -74,7 +104,7 @@ const Dashboard = () => {
               <li>
                 <NavLink
                   to="frequently"
-                  className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                  className="w-[350px] md:w-[250px] flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
                 >
                   <MdHistory className=" text-xl" />
                   <p className="font-semibold text-sm">Frequently</p>
@@ -96,7 +126,7 @@ const Dashboard = () => {
                 </div>
               </li>
             </ul>
-            
+
             <div className="border-b-[1px] border-secondary-200"></div>
             <ul className="my-2">
               <li>
