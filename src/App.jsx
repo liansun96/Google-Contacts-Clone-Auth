@@ -15,6 +15,8 @@ import Register from "./pages/Register";
 import Frequently from "./Components/Frequently";
 import Favorite from "./Components/Favorite";
 import FavoriteCon from "./Components/FavoriteCon";
+import Avaliable from "./Components/Avaliable";
+import Empty from "./Components/Empty";
 
 
 const App = () => {
@@ -32,11 +34,12 @@ const App = () => {
           <Route index element={<ContactsTable />} />
           <Route path="contactsTable" element={<ContactsTable />} />
           <Route path="createContact" element={<CreateContact />} />
-          <Route path="frequently" element={<Frequently />} />
+          <Route path="frequently" element={<Avaliable />} />
           <Route path="favoriteCon" element={<FavoriteCon />} />
           <Route path="editContact/:id" element={<EditContact />} />
           <Route path="changePasswordModal" element={<ChangePasswordModal />} />
           <Route path="singleContactInfo/:id" element={<SingleContactInfo />} />
+          <Route path="empty" element={<Empty />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register/>} />

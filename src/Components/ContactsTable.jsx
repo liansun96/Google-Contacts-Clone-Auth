@@ -21,8 +21,8 @@ import {
   removeContact,
 } from "../redux/services/favoritContactSlice";
 import { ToggleContext } from "../Context/ToggleProvider";
+import Empty from "./Empty";
 // import toast, { Toaster } from "react-hot-toast";
-
 
 const ContactTable = () => {
   const token = Cookies.get("token");
@@ -42,8 +42,6 @@ const ContactTable = () => {
   const { fav, toggleFav } = useContext(ToggleContext);
   const [inputValue, setInputValue] = useState("");
   // const notify = () => toast.success("Successfully deleted!");
-
-  
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -97,8 +95,8 @@ const ContactTable = () => {
       };
       const handleDelete = () => {
         deleteContact({ id: contact?.id, token });
-        notify
-      }
+        notify;
+      };
       return (
         <tr
           onClick={handleClick}
@@ -219,114 +217,116 @@ const ContactTable = () => {
     });
 
   return (
-    <div className="w-[95%]">
-      <div>
-        <table className="">
-          <thead className="">
-            <tr className="border-b-[1px] border-secondary-200 text-sm font-light text-slate-500 relative">
-              <th className="text-center font-semibold w-[25%] hidden md:block py-4 ms-4">
-                Name
-              </th>
-              <th className="text-start font-semibold py-4 w-[380px] md:hidden">
-                <div className="flex justify-between items-center">
-                  <span className="ms-4">Name</span>
-                  <div className="flex items-center space-x-5">
-                    <AiFillPrinter className="text-secondary-500 text-xl" />
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      className="NSy2Hd cdByRd RTiFqe undefined"
-                    >
-                      <path fill="none" d="M0 0h24v24H0V0z"></path>
-                      <path
+    <div>
+      {contacts?.length > 0 ? (
+        <div className="w-[95%]">
+          <div>
+            <table className="">
+              <thead className="">
+                <tr className="border-b-[1px] border-secondary-200 text-sm font-light text-slate-500 relative">
+                  <th className="text-center font-semibold w-[25%] hidden md:block py-4 ms-4">
+                    Name
+                  </th>
+                  <th className="text-start font-semibold py-4 w-[380px] md:hidden">
+                    <div className="flex justify-between items-center">
+                      <span className="ms-4">Name</span>
+                      <div className="flex items-center space-x-5">
+                        <AiFillPrinter className="text-secondary-500 text-xl" />
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          className="NSy2Hd cdByRd RTiFqe undefined"
+                        >
+                          <path fill="none" d="M0 0h24v24H0V0z"></path>
+                          <path
+                            fill="#686b70"
+                            d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zm-5.55-8h-2.9v3H8l4 4 4-4h-2.55z"
+                          ></path>
+                        </svg>
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          className="NSy2Hd cdByRd RTiFqe undefined"
+                        >
+                          <path
+                            fill="#686b70"
+                            d="M4 15h2v3h12v-3h2v3c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2m4.41-7.59L11 7.83V16h2V7.83l2.59 2.59L17 9l-5-5-5 5 1.41 1.41z"
+                          ></path>
+                        </svg>
+
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="#686b70"
+                          className="NSy2Hd cdByRd RTiFqe undefined"
+                        >
+                          <path fill="none" d="M0 0h24v24H0V0z"></path>
+                          <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </th>
+                  <th className="text-start font-semibold w-[23%] hidden md:table-cell">
+                    Email
+                  </th>
+                  <th className="text-start font-semibold w-[17%] hidden md:table-cell">
+                    Phone number
+                  </th>
+                  <th className="text-start font-semibold w-[20%] hidden md:table-cell">
+                    Address
+                  </th>
+                  <th className="w-[15%] hidden md:table-cell">
+                    <div className="flex items-center space-x-6">
+                      <AiFillPrinter className="text-secondary-500 text-xl" />
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        className="NSy2Hd cdByRd RTiFqe undefined"
+                      >
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path
+                          fill="#686b70"
+                          d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zm-5.55-8h-2.9v3H8l4 4 4-4h-2.55z"
+                        ></path>
+                      </svg>
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        className="NSy2Hd cdByRd RTiFqe undefined"
+                      >
+                        <path
+                          fill="#686b70"
+                          d="M4 15h2v3h12v-3h2v3c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2m4.41-7.59L11 7.83V16h2V7.83l2.59 2.59L17 9l-5-5-5 5 1.41 1.41z"
+                        ></path>
+                      </svg>
+
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
                         fill="#686b70"
-                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zm-5.55-8h-2.9v3H8l4 4 4-4h-2.55z"
-                      ></path>
-                    </svg>
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      className="NSy2Hd cdByRd RTiFqe undefined"
-                    >
-                      <path
-                        fill="#686b70"
-                        d="M4 15h2v3h12v-3h2v3c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2m4.41-7.59L11 7.83V16h2V7.83l2.59 2.59L17 9l-5-5-5 5 1.41 1.41z"
-                      ></path>
-                    </svg>
+                        className="NSy2Hd cdByRd RTiFqe undefined"
+                      >
+                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                        <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+                      </svg>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
 
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="#686b70"
-                      className="NSy2Hd cdByRd RTiFqe undefined"
-                    >
-                      <path fill="none" d="M0 0h24v24H0V0z"></path>
-                      <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                    </svg>
-                  </div>
-                </div>
-              </th>
-              <th className="text-start font-semibold w-[23%] hidden md:table-cell">
-                Email
-              </th>
-              <th className="text-start font-semibold w-[17%] hidden md:table-cell">
-                Phone number
-              </th>
-              <th className="text-start font-semibold w-[20%] hidden md:table-cell">
-                Address
-              </th>
-              <th className="w-[15%] hidden md:table-cell">
-                <div className="flex items-center space-x-6">
-                  <AiFillPrinter className="text-secondary-500 text-xl" />
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    className="NSy2Hd cdByRd RTiFqe undefined"
-                  >
-                    <path fill="none" d="M0 0h24v24H0V0z"></path>
-                    <path
-                      fill="#686b70"
-                      d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zm-5.55-8h-2.9v3H8l4 4 4-4h-2.55z"
-                    ></path>
-                  </svg>
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    className="NSy2Hd cdByRd RTiFqe undefined"
-                  >
-                    <path
-                      fill="#686b70"
-                      d="M4 15h2v3h12v-3h2v3c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2m4.41-7.59L11 7.83V16h2V7.83l2.59 2.59L17 9l-5-5-5 5 1.41 1.41z"
-                    ></path>
-                  </svg>
+              <p className="text-[10px] text-slate-500 font-bold tracking-widest md:ms-10 ms-5 py-2">
+                CONTACTS ({data?.contacts?.total})
+              </p>
 
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="#686b70"
-                    className="NSy2Hd cdByRd RTiFqe undefined"
-                  >
-                    <path fill="none" d="M0 0h24v24H0V0z"></path>
-                    <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                  </svg>
-                </div>
-              </th>
-            </tr>
-          </thead>
-
-          <p className="text-[10px] text-slate-500 font-bold tracking-widest md:ms-10 ms-5 py-2">
-            CONTACTS ({data?.contacts?.total})
-          </p>
-
-          <tbody>{row}</tbody>
-        </table>
-        {/* <div className="w-[50%] mx-auto flex justify-center ms-16 space-x-4 fixed bottom-0 items-center my-6 mt-auto">
+              <tbody>{row}</tbody>
+            </table>
+            {/* <div className="w-[50%] mx-auto flex justify-center ms-16 space-x-4 fixed bottom-0 items-center my-6 mt-auto">
           <button
             onClick={() => selectPageHandler(num - 1)}
             className={num > 1 ? "" : "hidden"}
@@ -355,37 +355,41 @@ const ContactTable = () => {
             <CiCircleChevRight className="text-2xl" />
           </button>
         </div> */}
-        <div className="w-[90%] md:w-[70%] mx-auto flex justify-center space-x-4 md:space-x-8 fixed -bottom-2 left-4 md:left-[200px] items-center my-6 mt-auto">
-          <button
-            onClick={() => selectPageHandler(current_page - 1)}
-            className={current_page > 1 ? "" : "hidden"}
-          >
-            <CiCircleChevLeft className="text-3xl md:text-2xl" />
-          </button>
-          {Array.from({ length: endPage - startPage + 1 }, (_, i) => {
-            const pageNumber = startPage + i;
-            return (
-              <span
-                className={`${
-                  pageNumber === current_page
-                    ? "bg-primary-100 text-white w-8 h-8 md:w-6 md:h-6 flex justify-center items-center rounded-full"
-                    : ""
-                } cursor-pointer`}
-                onClick={() => selectPageHandler(pageNumber)}
-                key={pageNumber}
+            <div className="w-[90%] md:w-[70%] mx-auto flex justify-center space-x-4 md:space-x-8 fixed -bottom-2 left-4 md:left-[200px] items-center my-6 mt-auto">
+              <button
+                onClick={() => selectPageHandler(current_page - 1)}
+                className={current_page > 1 ? "" : "hidden"}
               >
-                {pageNumber}
-              </span>              
-            );
-          })}
-          <button
-            onClick={() => selectPageHandler(current_page + 1)}
-            className={current_page < totalPages ? "" : "hidden"}
-          >
-            <CiCircleChevRight className="text-3xl md:text-2xl" />
-          </button>
+                <CiCircleChevLeft className="text-3xl md:text-2xl" />
+              </button>
+              {Array.from({ length: endPage - startPage + 1 }, (_, i) => {
+                const pageNumber = startPage + i;
+                return (
+                  <span
+                    className={`${
+                      pageNumber === current_page
+                        ? "bg-primary-100 text-white w-8 h-8 md:w-6 md:h-6 flex justify-center items-center rounded-full"
+                        : ""
+                    } cursor-pointer`}
+                    onClick={() => selectPageHandler(pageNumber)}
+                    key={pageNumber}
+                  >
+                    {pageNumber}
+                  </span>
+                );
+              })}
+              <button
+                onClick={() => selectPageHandler(current_page + 1)}
+                className={current_page < totalPages ? "" : "hidden"}
+              >
+                <CiCircleChevRight className="text-3xl md:text-2xl" />
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <Empty />
+      )}
     </div>
   );
 };
