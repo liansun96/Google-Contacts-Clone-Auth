@@ -12,7 +12,6 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-
 const EditContact = () => {
   const token = Cookies.get("token");
   const { id } = useParams();
@@ -26,8 +25,7 @@ const EditContact = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const notify = () => toast.success("Successfully deleted!");
-
+  const notify = () => toast.success("Successfully updated!");
 
   useEffect(() => {
     setName(contact?.contact?.name);
@@ -103,8 +101,31 @@ const EditContact = () => {
           >
             Save
           </button>
-          <Toaster position="top-right" />
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+              // Define default options
+              className: "",
+              duration: 5000,
+              style: {
+                background: "#363636",
+                color: "#fff",
+              },
 
+              // Default options for specific types
+              success: {
+                duration: 3000,
+                theme: {
+                  primary: "green",
+                  secondary: "black",
+                },
+              },
+            }}
+          />
         </div>
       </div>
       <div className="w-[95%] border-b-[1px] border-secondary-200 mt-3"></div>

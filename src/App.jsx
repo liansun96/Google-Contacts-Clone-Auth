@@ -17,7 +17,10 @@ import Favorite from "./Components/Favorite";
 import FavoriteCon from "./Components/FavoriteCon";
 import Avaliable from "./Components/Avaliable";
 import Empty from "./Components/Empty";
-
+import CreateLabels from "./Components/CreateLabels";
+import OtherContacts from "./Components/OtherContacts";
+import Trash from "./Components/Trash";
+import "animate.css";
 
 const App = () => {
   return (
@@ -40,9 +43,13 @@ const App = () => {
           <Route path="changePasswordModal" element={<ChangePasswordModal />} />
           <Route path="singleContactInfo/:id" element={<SingleContactInfo />} />
           <Route path="empty" element={<Empty />} />
+          <Route path="labels" element={<Avaliable />} />
+          <Route path="createLabels" element={<CreateLabels />} />
+          <Route path="otherContacts" element={<OtherContacts />} />
+          <Route path="trash" element={<Trash />} />
         </Route>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register/>} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

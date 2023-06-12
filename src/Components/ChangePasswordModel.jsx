@@ -42,7 +42,7 @@ const ChangePasswordModal = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[450px] h-[500px] bg-white border border-[#d3d4d7] rounded-lg flex flex-col justify-center items-center space-y-8"
+        className="w-[400px] md:w-[450px] h-[500px] bg-white border border-[#d3d4d7] rounded-lg flex flex-col justify-center items-center space-y-8"
       >
         <div className="flex justify-center items-center space-x-5">
           <img src={Logo} className="w-[15%]" alt="" />

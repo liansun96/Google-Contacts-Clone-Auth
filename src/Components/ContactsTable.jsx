@@ -22,7 +22,7 @@ import {
 } from "../redux/services/favoritContactSlice";
 import { ToggleContext } from "../Context/ToggleProvider";
 import Empty from "./Empty";
-// import toast, { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const ContactTable = () => {
   const token = Cookies.get("token");
@@ -41,6 +41,9 @@ const ContactTable = () => {
 
   const { fav, toggleFav } = useContext(ToggleContext);
   const [inputValue, setInputValue] = useState("");
+
+  const notify = () => toast("Successfully deleted.");
+
   // const notify = () => toast.success("Successfully deleted!");
 
   const handleInputChange = (e) => {
@@ -91,11 +94,11 @@ const ContactTable = () => {
       const randomColorIndex = Math.floor(Math.random() * colors.length);
       const randomColor = colors[randomColorIndex];
       const handleClick = () => {
-        navigate(`/singleContactInfo/${contact?.id}`);
+        navigate(`/${contact?.id}`);
       };
       const handleDelete = () => {
         deleteContact({ id: contact?.id, token });
-        notify;
+        if (data?.success) notify();
       };
       return (
         <tr
@@ -198,11 +201,7 @@ const ContactTable = () => {
                     </span>
                   </div>
                 </Link>
-                <button
-                  // onClick={notify}
-                  onClick={handleDelete}
-                  className="relative group/edit"
-                >
+                <button onClick={handleDelete} className="relative group/edit">
                   <MdDeleteOutline className="text-xl text-secondary-500" />
                   <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
                     <p className="text-center">Delete</p>
@@ -212,13 +211,38 @@ const ContactTable = () => {
               </div>
             </div>
           </td>
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+              // Define default options
+              className: "",
+              duration: 3000,
+              style: {
+                background: "#363636",
+                color: "#fff",
+              },
+
+              // Default options for specific types
+              success: {
+                duration: 3000,
+                theme: {
+                  primary: "green",
+                  secondary: "black",
+                },
+              },
+            }}
+          />
         </tr>
       );
     });
 
   return (
     <div>
-      {contacts?.length > 0 ? (
+      {contacts ? (
         <div className="w-[95%]">
           <div>
             <table className="">

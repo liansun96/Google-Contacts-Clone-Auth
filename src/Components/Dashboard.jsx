@@ -14,7 +14,7 @@ import Cookies from "js-cookie";
 import { useGetContactQuery } from "../redux/api/contactApi";
 import { ToggleContext } from "../Context/ToggleProvider";
 import "./Dashboard.css";
-import { RevolvingDot } from "react-loader-spinner";
+import { RevolvingDot, TailSpin } from "react-loader-spinner";
 
 const Dashboard = () => {
   const token = Cookies.get("token");
@@ -26,16 +26,15 @@ const Dashboard = () => {
     <div>
       {isLoading ? (
         <div className="flex justify-center items-center h-screen">
-          <RevolvingDot
-            height="1000"
-            width="1000"
-            radius="36"
-            color="#9173e9"
-            secondaryColor=""
-            ariaLabel="revolving-dot-loading"
+          <TailSpin
+            height="80"
+            width="80"
+            ariaLabel="tail-spin-loading"
+            radius="1"
             wrapperStyle={{}}
             wrapperClass=""
             visible={true}
+            color="#9173e9"
           />
         </div>
       ) : (
@@ -132,23 +131,32 @@ const Dashboard = () => {
                   <div className="border-b-[1px] border-secondary-200"></div>
                   <ul className="my-2">
                     <li>
-                      <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                      <NavLink
+                        to="labels"
+                        className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                      >
                         <MdOutlineKeyboardArrowUp className="text-secondary-500 text-xl" />
                         <p className="font-semibold text-sm">Labels</p>
-                      </div>
+                      </NavLink>
                     </li>
                     <li>
-                      <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                      <NavLink
+                        className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                        to="createLabels"
+                      >
                         <HiPlus className="text-secondary-500 text-xl" />
                         <p className="font-semibold text-sm">Create label</p>
-                      </div>
+                      </NavLink>
                     </li>
                   </ul>
 
                   <div className="border-b-[1px] border-secondary-200"></div>
                   <ul className="my-2">
                     <li>
-                      <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                      <NavLink
+                        className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                        to="otherContacts"
+                      >
                         <svg
                           width="20"
                           height="20"
@@ -162,13 +170,16 @@ const Dashboard = () => {
                           ></path>
                         </svg>
                         <p className="font-semibold text-sm">Other contacts</p>
-                      </div>
+                      </NavLink>
                     </li>
                     <li>
-                      <div className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]">
+                      <NavLink
+                        className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                        to="trash"
+                      >
                         <TfiTrash className="text-secondary-500 text-xl" />
                         <p className="font-semibold text-sm">Trash</p>
-                      </div>
+                      </NavLink>
                     </li>
                   </ul>
                 </div>

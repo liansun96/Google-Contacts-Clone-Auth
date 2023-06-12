@@ -30,6 +30,7 @@ const FavoriteCon = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
   //   const contacts = useSelector(
   //     (state) => state.favoriteContactSlice.favContacts
   //   );
@@ -132,24 +133,7 @@ const FavoriteCon = () => {
                 <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
                   <p className="text-center">Star</p>
                 </span>
-              </div>
-              {/* <div
-                onClick={() => toggleFav(contact)}
-                className="relative group/edit"
-              >
-                {fav ? (
-                  <MdOutlineStarBorder className="text-xl text-secondary-500" />
-                ) : (
-                  <MdStar className="text-xl text-secondary-500" />
-                )}
-                <input
-                  type="text"
-                  className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]"
-                  placeholder="Star"
-                  onChange={handleInputChange}
-                  value={inputValue}
-                />
-              </div> */}
+              </div>              
               <Link to={`/singleContactInfo/${contact?.id}`}>
                 <div className="relative group/edit">
                   <MdInfoOutline className="text-xl text-secondary-500" />

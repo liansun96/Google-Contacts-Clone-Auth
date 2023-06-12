@@ -48,7 +48,7 @@ const ToggleProvider = ({ children }) => {
     }
   };
 
-  const value = { isOpen, setIsOpen, toggleSitebar, modal, toggleModal ,randomColor ,fav ,toggleFav };
+  const value = { isOpen, setIsOpen, toggleSitebar, modal, toggleModal ,randomColor ,fav ,toggleFav ,removeContact };
 
   return (
     <ToggleContext.Provider value={value}>{children}</ToggleContext.Provider>

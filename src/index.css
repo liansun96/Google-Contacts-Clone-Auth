@@ -34,4 +34,14 @@
   .change-password-drop {
     @apply absolute bg-white cus-shadow-sm w-[220px] h-[86px] z-10 right-[200px] top-[60px] text-sm  duration-300 origin-top-right;
   }
+
+  @media screen and (max-width:600px) {
+    .drop {
+      @apply bg-[#F4FBFF] absolute cus-shadow-lg w-[370px] h-[250px] z-10 -right-[18px] top-[41px] text-sm rounded-3xl  duration-300 origin-top;
+    }
+
+    .change-password-drop {
+      @apply absolute bg-white cus-shadow-sm w-[220px] h-[86px] z-10 right-[150px] top-[60px] text-sm  duration-300 origin-top-right;
+    }
+}
 }
