@@ -34,11 +34,12 @@ const ContactTable = () => {
   console.log(data);
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contactSlice.contacts);
+  const favContacts = useSelector((state) => state.favoriteContactSlice.favContacts);
+  console.log(favContacts);
   const searchContact = useSelector(
     (state) => state.contactSlice.searchContact
   );
-  console.log(contacts);
-
+  
   const { fav, toggleFav } = useContext(ToggleContext);
   const [inputValue, setInputValue] = useState("");
 
@@ -80,6 +81,15 @@ const ContactTable = () => {
   const startPage = Math.max(1, current_page - Math.floor(per_page / 2));
   const endPage = Math.min(totalPages, startPage + per_page - 1);
 
+  const handleCheckboxChange = (index) => {
+    // Create a copy of the contacts array to avoid mutating state directly
+    const updatedContacts = [...contacts];
+    updatedContacts[index].checked = !updatedContacts[index].checked;
+    useEffect(() => {
+      dispatch(addContacts(updatedContacts));
+    }, [data]);
+  };
+
   const row = contacts
     ?.filter((item) => {
       if (searchContact === "") {
@@ -100,6 +110,19 @@ const ContactTable = () => {
         deleteContact({ id: contact?.id, token });
         if (data?.success) notify();
       };
+
+      const isContactInList = favContacts?.find((c) => c.id === contact?.id);
+      console.log(isContactInList);
+
+      const handleAddFav = () => {
+        if (isContactInList) {
+          dispatch(removeContact(contact));          
+        } else {
+          // Movie is not in the list, dispatch addMovie action
+          dispatch(addContact(contact));          
+        }
+      };
+
       return (
         <tr
           onClick={handleClick}
@@ -156,35 +179,18 @@ const ContactTable = () => {
             <div className="hidden group-hover/item:block">
               <div className="flex items-center space-x-5 duration-400 mr-[15px]">
                 <div
-                  onClick={() => toggleFav(contact)}
+                  onClick={() => handleAddFav(contact)}
                   className="relative group/edit"
                 >
-                  {fav ? (
-                    <MdOutlineStarBorder className="text-xl text-secondary-500" />
-                  ) : (
+                  {isContactInList ? (
                     <MdStar className="text-xl text-secondary-500" />
+                  ) : (
+                    <MdOutlineStarBorder className="text-xl text-secondary-500" />
                   )}
                   <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
                     <p className="text-center">Star</p>
                   </span>
                 </div>
-                {/* <div
-                  onClick={() => toggleFav(contact)}
-                  className="relative group/edit"
-                >
-                  {fav ? (
-                    <MdOutlineStarBorder className="text-xl text-secondary-500" />
-                  ) : (
-                    <MdStar className="text-xl text-secondary-500" />
-                  )}
-                  <input
-                    type="text"
-                    className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]"
-                    placeholder="Star"
-                    onChange={handleInputChange}
-                    value={inputValue}
-                  />
-                </div> */}
                 <Link to={`/singleContactInfo/${contact?.id}`}>
                   <div className="relative group/edit">
                     <MdInfoOutline className="text-xl text-secondary-500" />

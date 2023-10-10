@@ -11,7 +11,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addContact,
-  addFavoriteContacts,
   removeContact,
 } from "../redux/services/favoritContactSlice";
 import { ToggleContext } from "../Context/ToggleProvider";
@@ -23,21 +22,13 @@ const FavoriteCon = () => {
   const favContacts = useSelector(
     (state) => state.favoriteContactSlice.favContacts
   );
-  console.log(favContacts);
+  // console.log(favContacts);
 
   const token = Cookies.get("token");
   const [num, setNum] = useState(1);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-  //   const contacts = useSelector(
-  //     (state) => state.favoriteContactSlice.favContacts
-  //   );
-  //   console.log(contacts);
-  //   const searchFavContact = useSelector(
-  //     (state) => state.contactSlice.searchFavContact
-  //   );
 
   const { fav, toggleFav } = useContext(ToggleContext);
 
@@ -52,10 +43,6 @@ const FavoriteCon = () => {
     "#008B74",
   ];
 
-  //   useEffect(() => {
-  //     dispatch(addFavoriteContacts(favContacts));
-  //   }, []);
-
   const row = favContacts?.map((contact) => {
     const randomColorIndex = Math.floor(Math.random() * colors.length);
     const randomColor = colors[randomColorIndex];
@@ -66,6 +53,19 @@ const FavoriteCon = () => {
       deleteContact({ id: contact?.id, token });
       notify;
     };
+
+    const isContactInList = favContacts?.find((c) => c.id === contact?.id);
+    console.log(isContactInList);
+
+    const handleAddFav = () => {
+      if (isContactInList) {
+        dispatch(removeContact(contact));       
+      } else {
+        // Movie is not in the list, dispatch addMovie action
+        dispatch(addContact(contact));       
+      }
+    };
+
     return (
       <tr
         onClick={handleClick}
@@ -122,18 +122,18 @@ const FavoriteCon = () => {
           <div className="hidden group-hover/item:block">
             <div className="flex items-center space-x-5 duration-400 mr-[15px]">
               <div
-                onClick={() => toggleFav(contact)}
+                onClick={() => handleAddFav(contact)}
                 className="relative group/edit"
               >
-                {fav ? (
-                  <MdOutlineStarBorder className="text-xl text-secondary-500" />
-                ) : (
+                {isContactInList ? (
                   <MdStar className="text-xl text-secondary-500" />
+                ) : (
+                  <MdOutlineStarBorder className="text-xl text-secondary-500" />
                 )}
                 <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
                   <p className="text-center">Star</p>
                 </span>
-              </div>              
+              </div>
               <Link to={`/singleContactInfo/${contact?.id}`}>
                 <div className="relative group/edit">
                   <MdInfoOutline className="text-xl text-secondary-500" />
