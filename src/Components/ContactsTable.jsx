@@ -104,7 +104,7 @@ const ContactTable = () => {
       const randomColorIndex = Math.floor(Math.random() * colors.length);
       const randomColor = colors[randomColorIndex];
       const handleClick = () => {
-        navigate(`/${contact?.id}`);
+        navigate(`/singleContactInfo/${contact?.id}`);
       };
       const handleDelete = () => {
         deleteContact({ id: contact?.id, token });
