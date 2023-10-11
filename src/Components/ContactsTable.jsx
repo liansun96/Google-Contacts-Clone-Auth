@@ -34,12 +34,14 @@ const ContactTable = () => {
   console.log(data);
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contactSlice.contacts);
-  const favContacts = useSelector((state) => state.favoriteContactSlice.favContacts);
+  const favContacts = useSelector(
+    (state) => state.favoriteContactSlice.favContacts
+  );
   console.log(favContacts);
   const searchContact = useSelector(
     (state) => state.contactSlice.searchContact
   );
-  
+
   const { fav, toggleFav } = useContext(ToggleContext);
   const [inputValue, setInputValue] = useState("");
 
@@ -116,10 +118,10 @@ const ContactTable = () => {
 
       const handleAddFav = () => {
         if (isContactInList) {
-          dispatch(removeContact(contact));          
+          dispatch(removeContact(contact));
         } else {
           // Movie is not in the list, dispatch addMovie action
-          dispatch(addContact(contact));          
+          dispatch(addContact(contact));
         }
       };
 
@@ -187,9 +189,15 @@ const ContactTable = () => {
                   ) : (
                     <MdOutlineStarBorder className="text-xl text-secondary-500" />
                   )}
-                  <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
-                    <p className="text-center">Star</p>
-                  </span>
+                  {isContactInList ? (
+                    <span className="hidden group-hover/edit:block absolute top-5 -left-12 w-[120px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                      <p className="text-center">Remove star</p>
+                    </span>
+                  ) : (
+                    <span className="hidden group-hover/edit:block absolute top-5 -left-12 w-[120px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                      <p className="text-center">Star contact</p>
+                    </span>
+                  )}
                 </div>
                 <Link to={`/singleContactInfo/${contact?.id}`}>
                   <div className="relative group/edit">

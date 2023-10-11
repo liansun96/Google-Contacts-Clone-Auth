@@ -96,7 +96,7 @@ const Dashboard = () => {
                       <NavLink
                         // onClick={()=>setIsOpen(true)}
                         exact
-                        to="contactsTable"
+                        to="/"
                         className="w-[350px] md:w-[250px] flex justify-between items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
                       >
                         <div className="flex items-center space-x-6">

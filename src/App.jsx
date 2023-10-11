@@ -32,8 +32,8 @@ const App = () => {
             </Guard>
           }
         >
-          <Route element={<ContactsTable />} />
-          <Route path="contactsTable" element={<ContactsTable />} />
+          {/* <Route element={<ContactsTable />} /> */}
+          <Route path="/" element={<ContactsTable />} />
           <Route path="createContact" element={<CreateContact />} />
           <Route path="frequently" element={<Avaliable />} />
           <Route path="favoriteCon" element={<FavoriteCon />} />
