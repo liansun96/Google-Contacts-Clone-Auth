@@ -69,7 +69,7 @@ const EditContact = () => {
 
           <button
             type="submit"
-            className="px-5 py-1 rounded text-white bg-primary-100 hover:bg-primary-200"
+            className="px-5 py-1 rounded-full text-white bg-primary-100 hover:bg-primary-200"
           >
             Save
           </button>

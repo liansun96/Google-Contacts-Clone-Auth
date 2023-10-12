@@ -130,9 +130,15 @@ const FavoriteCon = () => {
                 ) : (
                   <MdOutlineStarBorder className="text-xl text-secondary-500" />
                 )}
-                <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
-                  <p className="text-center">Star</p>
-                </span>
+                {isContactInList ? (
+                    <span className="hidden group-hover/edit:block absolute top-5 -left-12 w-[120px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                      <p className="text-center">Remove star</p>
+                    </span>
+                  ) : (
+                    <span className="hidden group-hover/edit:block absolute top-5 -left-12 w-[120px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
+                      <p className="text-center">Star contact</p>
+                    </span>
+                  )}
               </div>
               <Link to={`/singleContactInfo/${contact?.id}`}>
                 <div className="relative group/edit">
