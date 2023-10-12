@@ -45,15 +45,15 @@ const SingleContactInfo = () => {
 
   const dispatch = useDispatch();
 
-  const isContactInList = favContacts?.find((c) => c.id === contact?.id);
+  const isContactInList = favContacts?.find((c) => c.id === contact?.contact?.id);
   console.log(isContactInList);
 
   const handleAddFav = () => {
     if (isContactInList) {
-      dispatch(removeContact(contact));
+      dispatch(removeContact(contact?.contact));
     } else {
       // Movie is not in the list, dispatch addMovie action
-      dispatch(addContact(contact));
+      dispatch(addContact(contact?.contact));
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ContactLogo from "../images/contact-logo.svg";
 import { HiOutlineUser, HiPlus } from "react-icons/hi";
 import {
@@ -15,13 +15,35 @@ import { useGetContactQuery } from "../redux/api/contactApi";
 import { ToggleContext } from "../Context/ToggleProvider";
 import "./Dashboard.css";
 import { RevolvingDot, TailSpin } from "react-loader-spinner";
+import { BiMenu } from "react-icons/bi";
 
 const Dashboard = () => {
   const token = Cookies.get("token");
   const { data, isLoading } = useGetContactQuery({ token });
   console.log(data);
 
-  const { isOpen, setIsOpen } = useContext(ToggleContext);
+  const { isOpen, setIsOpen, toggleSitebar } = useContext(ToggleContext);
+
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  console.log(screenWidth);
+  // Function to update the screen width on resize
+  const updateScreenWidth = () => {
+    setScreenWidth(window.innerWidth);
+  };
+  // useEffect hook to add and remove the resize event listener
+  useEffect(() => {
+    // Add event listener on component mount
+    window.addEventListener("resize", updateScreenWidth);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", updateScreenWidth);
+    };
+  }, []); // Empty dependency array to run the effect only once on mount
+
+  screenWidth > 600 ? (console.log('I greater than 600'), setIsOpen(false)) : null;
+
+  
   return (
     <div>
       {isLoading ? (
@@ -59,7 +81,7 @@ const Dashboard = () => {
                 className={`${
                   isOpen
                     ? "w-[0px] mobile-nav  -translate-x-[500px]"
-                    : "w-full md:w-[330px] block mobile-nav"
+                    : "w-[70%] cus-shadow-lg md:shadow-none md:w-[330px] block mobile-nav"
                 } transform duration-700 `}
               >
                 <div className="w-[90%] relative">
@@ -81,15 +103,20 @@ const Dashboard = () => {
                       </button>
                     </div>
                   </Link>
-                  <button
-                    onClick={() => setIsOpen(true)}
-                    className="absolute right-0 top-2 block md:hidden"
-                  >
-                    <MdOutlineCancel className="text-secondary-500 text-2xl" />
-                  </button>
-                  <div className="flex justify-start items-center ms-4 space-x-6 mt-4 blcok md:hidden">
-                    <img src={ContactLogo} className="w-[40px] " alt="" />
-                    <p className="text-secondary-500 text-4xl">Contacts</p>
+
+                  <div className="flex justify-between items-center ms-4  mt-4 blcok md:hidden">
+                    <div className="flex items-center">
+                      <button
+                        onClick={toggleSitebar}
+                        className="w-[50px] h-[50px] flex justify-center items-center rounded-full hover:bg-secondary-200"
+                      >
+                        <BiMenu className="text-secondary-500 text-2xl" />
+                      </button>
+                      <img src={ContactLogo} className="w-[40px] " alt="" />
+                    </div>
+                    <p className="text-secondary-500 font-semibold text-2xl me-10">
+                      Contacts
+                    </p>
                   </div>
                   <ul className="my-2 mt-6">
                     <li>
@@ -97,7 +124,7 @@ const Dashboard = () => {
                         // onClick={()=>setIsOpen(true)}
                         exact
                         to="/"
-                        className="w-[350px] md:w-[250px] flex justify-between items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
+                        className="w-[260px] md:w-[250px] flex justify-between items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300  rounded-tr-[40px] rounded-br-[40px]"
                       >
                         <div className="flex items-center space-x-6">
                           <HiOutlineUser className="text-xl" />
@@ -111,7 +138,7 @@ const Dashboard = () => {
                     <li>
                       <NavLink
                         to="favoriteCon"
-                        className="w-[350px] md:w-[250px] flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                        className="w-[260px] md:w-[250px] flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
                       >
                         {/* <RiUser3Line className='text-xl'/> */}
                         <MdOutlineStarBorder className="text-xl " />
@@ -121,7 +148,7 @@ const Dashboard = () => {
                     <li>
                       <NavLink
                         to="frequently"
-                        className="w-[350px] md:w-[250px] flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
+                        className="w-[260px] md:w-[250px] flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
                       >
                         <MdHistory className=" text-xl" />
                         <p className="font-semibold text-sm">Frequently</p>

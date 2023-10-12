@@ -76,7 +76,7 @@ const Nav = () => {
         <div className="w-[40%] md:w-[50%] lg:w-[60%] xl:w-[70%] 2xl:w-[70%] 3xl:w-[70%] flex justify-end mx:justify-between lg:justify-between xl:justify-between 2xl:justify-between 3xl:justify-between items-center">
           <div
             className={`${
-              showInput ? "w-[180px] px-2" : "w-[50px]"
+              showInput ? "w-[170px] px-2 md:px-0 duration-500" : "w-[50px] duration-500"
             }   h-[50px] md-w-[68%] lg-w-[68%] xl:w-[68%] 2xl:w-[68%] 3xl:w-[68%] flex justify-center md:justify-start lg:justify-start xl:justify-start 2xl:justify-start 3xl:justify-start items-center lg:space-x-4 xl:space-x-4 2xl:space-x-4 3xl:space-x-4 rounded-full md:rounded-lg lg:rounded-lg xl:rounded-lg 2xl:rounded-lg 3xl:rounded-lg  bg-secondary-300`}
           >
             <div className="w-[40px] h-[40px] flex justify-center items-center rounded-full hover:bg-secondary-200 md:ml-2 lg:ml-2 xl:ml-2 2xl:ml-2 3xl:ml-2">
@@ -92,7 +92,7 @@ const Nav = () => {
               onChange={(e) => dispatch(setSearchContact(e.target.value))}
               value={searchContact}
               className={`outline-none bg-secondary-300 ${
-                showInput ? "w-[120px]" : "w-0"
+                showInput ? "w-[110px] duration-500" : "w-0 duration-500"
               }`}
             />
           </div>
