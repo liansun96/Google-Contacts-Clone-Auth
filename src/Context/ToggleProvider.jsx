@@ -24,7 +24,7 @@ const ToggleProvider = ({ children }) => {
       const randomColor = colors[randomColorIndex];
 
   //sitebar toggler
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const toggleSitebar = () => {
     setIsOpen(!isOpen);
   };

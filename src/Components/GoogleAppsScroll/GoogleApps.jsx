@@ -8,8 +8,8 @@ const GoogleApps = ({ showApp }) => {
     <div
       className={
         showApp
-          ? "scale-y-1 z-10 duration-300 origin-left absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth scale-y-1"
-          : "scale-y-0 z-10 duration-300 origin-left absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth scale-y-0"
+          ? "opacity-100 visible z-10 duration-300 origin-left absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth"
+          : "opacity-0 invisible translate-y-3 z-10 duration-300 origin-left absolute cus-shadow-lg right-[15px] top-[60px] bg-white w-[322px] h-[400px] font-robo cus-shadow-lg p-5 rounded-lg overflow-y-scroll scroll-smooth"
       }
     >
       <div className="flex flex-wrap items-center justify-center gap-4">
@@ -109,7 +109,7 @@ const GoogleApps = ({ showApp }) => {
         <Link to={"https://meet.google.com/?pli=1"} target="_blank">
           <div className="flex flex-col w-[80px] h-[85px] hover:bg-blue-100 justify-center items-center gap-1 rounded-lg">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Google_Meet_logo_%282022%29.png"
+              src="https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v1/web-96dp/logo_meet_2020q4_color_2x_web_96dp.png"
               className="w-[40px] h-[40px]"
               alt=""
             />

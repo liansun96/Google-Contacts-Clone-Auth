@@ -24,26 +24,7 @@ const Dashboard = () => {
 
   const { isOpen, setIsOpen, toggleSitebar } = useContext(ToggleContext);
 
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  console.log(screenWidth);
-  // Function to update the screen width on resize
-  const updateScreenWidth = () => {
-    setScreenWidth(window.innerWidth);
-  };
-  // useEffect hook to add and remove the resize event listener
-  useEffect(() => {
-    // Add event listener on component mount
-    window.addEventListener("resize", updateScreenWidth);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", updateScreenWidth);
-    };
-  }, []); // Empty dependency array to run the effect only once on mount
-
-  screenWidth > 600 ? (console.log('I greater than 600'), setIsOpen(false)) : null;
-
-  
+    
   return (
     <div>
       {isLoading ? (

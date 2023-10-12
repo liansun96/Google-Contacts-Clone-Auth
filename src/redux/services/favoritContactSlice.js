@@ -31,7 +31,7 @@ export const favoriteContactSlice = createSlice({
     },
     removeContact: (state, { payload }) => {
       state.favContacts = state.favContacts.filter((item) => item.id !== payload.id);
-      
+      Cookies.set(STORAGE_KEY, JSON.stringify(state.favContacts));
     },
     clearContact: (state) => {
       state.favContacts = [];

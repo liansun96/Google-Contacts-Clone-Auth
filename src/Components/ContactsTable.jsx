@@ -23,6 +23,7 @@ import {
 import { ToggleContext } from "../Context/ToggleProvider";
 import Empty from "./Empty";
 import toast, { Toaster } from "react-hot-toast";
+import { TailSpin } from "react-loader-spinner";
 
 const ContactTable = () => {
   const token = Cookies.get("token");
@@ -426,7 +427,18 @@ const ContactTable = () => {
           </div>
         </div>
       ) : (
-        <Empty />
+        <div className="flex justify-center items-start pt-20 h-screen">
+          <TailSpin
+            height="50"
+            width="50"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            color="#9173e9"
+          />
+        </div>
       )}
     </div>
   );

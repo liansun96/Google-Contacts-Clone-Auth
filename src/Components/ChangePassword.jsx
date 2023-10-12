@@ -12,8 +12,8 @@ const ChangePassword = ({ showSetting }) => {
     <div
       className={
         showSetting
-          ? "change-password-drop scale-y-1"
-          : "change-password-drop scale-y-0"
+          ? "change-password-drop opacity-100 text-secondary-500"
+          : "change-password-drop opacity-0 translate-y-3"
       }
     >
       <div
