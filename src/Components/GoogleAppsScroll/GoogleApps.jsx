@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import './GoogleApp.css';
+import "./GoogleApp.css";
 
-const GoogleApps = ({ showApp }) => {
+const GoogleApps = ({ showApp, randomColor, user }) => {
   return (
     <div
       className={
@@ -13,12 +13,18 @@ const GoogleApps = ({ showApp }) => {
       }
     >
       <div className="flex flex-wrap items-center justify-center gap-4">
-        <Link to={"https://www.google.com/?authuser=0"} target="_blank">
-          <div className="flex flex-col w-[80px] h-[85px] hover:bg-blue-100 justify-center items-center gap-1 rounded-lg">
-            <div className="w-[40px] h-[40px] rounded-full bg-orange-400"></div>
-            <h4>Account</h4>
+        <div className="flex flex-col">
+          <div
+            style={{ backgroundColor: randomColor }}
+            className="w-[50px] h-[50px]  hover:ring-primary-100 select-none cursor-pointer flex justify-center items-center rounded-full"
+          >
+            <span className="text-xl text-white">
+              {user?.name.charAt().toUpperCase()}
+            </span>
           </div>
-        </Link>
+          <h4>Account</h4>
+        </div>
+
         <Link to={"https://www.google.com/?authuser=0"} target="_blank">
           <div className="flex flex-col w-[80px] h-[85px] hover:bg-blue-100 justify-center items-center gap-1 rounded-lg">
             <FcGoogle className="w-[40px] h-[40px]" />

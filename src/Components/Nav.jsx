@@ -192,7 +192,7 @@ const Nav = () => {
             </span>
           </div>
           <div ref={showAppRef}>
-            <GoogleApps showApp={showApp} />
+            <GoogleApps randomColor={randomColor} user={user} showApp={showApp} />
           </div>
           <div ref={showRef} className="relative group z-[1001]">
             <div
