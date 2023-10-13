@@ -182,7 +182,7 @@ const Nav = () => {
             </span>
           </div>
 
-          <div ref={showRef} className="relative group z-[1001]">
+          <div ref={showRef} className="relative group z-10">
             <div
               onClick={handleToggle}
               style={{ backgroundColor: randomColor }}

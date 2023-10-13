@@ -9,8 +9,8 @@ const ChangePassword = ({ showSetting }) => {
     <div
       className={
         showSetting
-          ? "change-password-drop opacity-100 text-secondary-500 p-3"
-          : "change-password-drop opacity-0 -z-10 translate-y-3 p-3"
+          ? "change-password-drop opacity-100 text-secondary-500 p-2"
+          : "change-password-drop opacity-0 -z-10 translate-y-3 p-2"
       }
     >
       <div className="cus-shadow-sm rounded-[20px]">

@@ -25,6 +25,7 @@ const EditContact = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  
   const notify = () => toast.success("Successfully updated!");
 
   useEffect(() => {
@@ -53,11 +54,11 @@ const EditContact = () => {
     <form onSubmit={editHandler} className="w-[100%] px-10">
       <div className="relative">
         <button
-          className="fixed text-xl top-[100px] left-5 md:left-[300px]  group"
+          className="fixed flex items-center justify-center rounded-full text-xl top-[92px] left-2 md:left-[280px] group w-[40px] h-[40px] cursor-pointer hover:bg-secondary-200"
           onClick={() => nav("/")}
         >
           <RxCross2 className="text-secondary-500 text-xl" />
-          <span className="hidden group-hover:block absolute top-6 -left-8 w-[85px] p-2 bg-secondary-500 text-white font-nromal rounded scale-[50%]">
+          <span className="hidden group-hover:block absolute top-10 md:-left-6 w-[85px] p-2 bg-secondary-500 text-white font-nromal rounded scale-[50%]">
             <p>Cancel</p>
           </span>
         </button>
@@ -69,7 +70,7 @@ const EditContact = () => {
 
           <button
             type="submit"
-            className="px-5 py-1 rounded-full text-white bg-primary-100 hover:bg-primary-200"
+            className="px-5 py-1 rounded-full text-white bg-primary-100 hover:bg-primary-200 hover:shadow-md"
           >
             Save
           </button>

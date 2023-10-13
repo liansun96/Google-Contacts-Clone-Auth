@@ -38,7 +38,7 @@ const ChangePasswordModal = () => {
   return (
     <div
       onClick={toggleModal}
-      className="fixed inset-0 bg-primary bg-opacity-25  backdrop-blur-sm flex justify-center items-center"
+      className="fixed inset-0 bg-black bg-opacity-50  flex justify-center items-center z-20"
     >
       <div
         onClick={(e) => e.stopPropagation()}

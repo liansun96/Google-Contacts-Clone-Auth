@@ -21,10 +21,10 @@ import {
   removeContact,
 } from "../redux/services/favoritContactSlice";
 import { ToggleContext } from "../Context/ToggleProvider";
-import Empty from "./Empty";
 import toast, { Toaster } from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
 import ChangePasswordModal from "./ChangePasswordModel";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 const ContactTable = () => {
   const token = Cookies.get("token");
@@ -45,16 +45,13 @@ const ContactTable = () => {
     (state) => state.contactSlice.searchContact
   );
 
-  const { fav, toggleFav ,modal } = useContext(ToggleContext);
-  const [inputValue, setInputValue] = useState("");
+  const { modal, deleteModal, toggleDeleteModal, handleGetId } =
+    useContext(ToggleContext);
+  
 
   const notify = () => toast("Successfully deleted.");
 
-  // const notify = () => toast.success("Successfully deleted!");
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  // const notify = () => toast.success("Successfully deleted!");  
 
   const colors = [
     "#845EC2",
@@ -126,6 +123,11 @@ const ContactTable = () => {
           // Movie is not in the list, dispatch addMovie action
           dispatch(addContact(contact));
         }
+      };
+
+      const handleDeleteModal = () => {
+        handleGetId(contact?.id);
+        toggleDeleteModal()
       };
 
       return (
@@ -218,7 +220,10 @@ const ContactTable = () => {
                     </span>
                   </div>
                 </Link>
-                <button onClick={handleDelete} className="relative group/edit">
+                <button
+                  onClick={handleDeleteModal}
+                  className="relative group/edit"
+                >
                   <MdDeleteOutline className="text-xl text-secondary-500" />
                   <span className="hidden group-hover/edit:block absolute top-5 -left-6 w-[70px] p-2 bg-secondary-500 text-white font-bold rounded scale-[60%]">
                     <p className="text-center">Delete</p>
@@ -428,6 +433,7 @@ const ContactTable = () => {
             </div>
           </div>
           {modal && <ChangePasswordModal />}
+          {deleteModal && <ConfirmDeleteModal />}
         </div>
       ) : (
         <div className="flex justify-center items-start pt-20 h-screen">

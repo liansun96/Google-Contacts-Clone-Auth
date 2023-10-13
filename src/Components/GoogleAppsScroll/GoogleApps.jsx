@@ -14,10 +14,10 @@ const GoogleApps = ({ showApp, randomColor, user }) => {
     >
       <div className=" p-3 cus-shadow-lg rounded-[20px]">
         <div className="flex flex-wrap items-center justify-center gap-2">
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center justify-center gap-1 w-[80px] h-[85px] hover:bg-blue-100 rounded-lg">
             <div
               style={{ backgroundColor: randomColor }}
-              className="w-[40px] h-[40px]  hover:ring-primary-100 select-none cursor-pointer flex justify-center items-center rounded-full"
+              className="w-[40px] h-[40px] mt-1 hover:ring-primary-100 select-none cursor-pointer flex justify-center items-center rounded-full"
             >
               <span className="text-xl text-white">
                 {user?.name.charAt().toUpperCase()}
