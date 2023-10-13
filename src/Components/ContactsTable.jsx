@@ -24,6 +24,7 @@ import { ToggleContext } from "../Context/ToggleProvider";
 import Empty from "./Empty";
 import toast, { Toaster } from "react-hot-toast";
 import { TailSpin } from "react-loader-spinner";
+import ChangePasswordModal from "./ChangePasswordModel";
 
 const ContactTable = () => {
   const token = Cookies.get("token");
@@ -33,6 +34,7 @@ const ContactTable = () => {
   const { data } = useGetContactQuery({ token, num });
   const [deleteContact] = useDeleteContactMutation();
   console.log(data);
+  console.log(data?.contacts?.links);
   const dispatch = useDispatch();
   const contacts = useSelector((state) => state.contactSlice.contacts);
   const favContacts = useSelector(
@@ -43,7 +45,7 @@ const ContactTable = () => {
     (state) => state.contactSlice.searchContact
   );
 
-  const { fav, toggleFav } = useContext(ToggleContext);
+  const { fav, toggleFav ,modal } = useContext(ToggleContext);
   const [inputValue, setInputValue] = useState("");
 
   const notify = () => toast("Successfully deleted.");
@@ -425,6 +427,7 @@ const ContactTable = () => {
               </button>
             </div>
           </div>
+          {modal && <ChangePasswordModal />}
         </div>
       ) : (
         <div className="flex justify-center items-start pt-20 h-screen">

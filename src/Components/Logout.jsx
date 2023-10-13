@@ -23,7 +23,7 @@ const Logout = ({ show, user ,randomColor }) => {
   };
 
   return (
-    <div className={show ? "drop opacity-100 visible" : "drop opacity-0 invisible translate-y-3"}>
+    <div className={show ? "drop opacity-100 visible" : "drop opacity-0 -z-10 invisible translate-y-3"}>
       <div className="w-[95%] h-[139px] mx-auto bg-white cus-shadow-sm rounded-[20px] mt-2">
         <div className="flex justify-start items-center ps-9 space-x-3 py-5  px-6">
           <div className="w-[20%]">
