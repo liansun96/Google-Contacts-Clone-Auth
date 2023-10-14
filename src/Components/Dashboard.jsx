@@ -3,18 +3,16 @@ import ContactLogo from "../images/contact-logo.svg";
 import { HiOutlineUser, HiPlus } from "react-icons/hi";
 import {
   MdHistory,
-  MdOutlineCancel,
   MdOutlineKeyboardArrowUp,
   MdOutlineStarBorder,
 } from "react-icons/md";
-import { TfiTrash } from "react-icons/tfi";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Nav from "./Nav";
 import Cookies from "js-cookie";
 import { useGetContactQuery } from "../redux/api/contactApi";
 import { ToggleContext } from "../Context/ToggleProvider";
 import "./Dashboard.css";
-import { RevolvingDot, TailSpin } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 import { BiMenu } from "react-icons/bi";
 
 const Dashboard = () => {
@@ -22,9 +20,8 @@ const Dashboard = () => {
   const { data, isLoading } = useGetContactQuery({ token });
   console.log(data);
 
-  const { isOpen, setIsOpen, toggleSitebar } = useContext(ToggleContext);
+  const { isOpen, toggleSitebar } = useContext(ToggleContext);
 
-    
   return (
     <div>
       {isLoading ? (
@@ -185,7 +182,15 @@ const Dashboard = () => {
                         className="flex justify-start items-center px-6 py-[11px] text-[#686b70] space-x-6 hover:bg-secondary-300 rounded-tr-[40px] rounded-br-[40px]"
                         to="trash"
                       >
-                        <TfiTrash className="text-secondary-500 text-xl" />
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="#686b70"
+                        >
+                          <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
+                          <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+                        </svg>
                         <p className="font-semibold text-sm">Trash</p>
                       </NavLink>
                     </li>

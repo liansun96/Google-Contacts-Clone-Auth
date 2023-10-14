@@ -5,9 +5,11 @@ import {
   MdDeleteOutline,
   MdInfoOutline,
   MdStar,
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardArrowLeft,
 } from "react-icons/md";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiFillPrinter } from "react-icons/ai";
-import { CiCircleChevLeft, CiCircleChevRight } from "react-icons/ci";
 import {
   useDeleteContactMutation,
   useGetContactQuery,
@@ -47,11 +49,10 @@ const ContactTable = () => {
 
   const { modal, deleteModal, toggleDeleteModal, handleGetId } =
     useContext(ToggleContext);
-  
 
   const notify = () => toast("Successfully deleted.");
 
-  // const notify = () => toast.success("Successfully deleted!");  
+  // const notify = () => toast.success("Successfully deleted!");
 
   const colors = [
     "#845EC2",
@@ -83,14 +84,8 @@ const ContactTable = () => {
   const startPage = Math.max(1, current_page - Math.floor(per_page / 2));
   const endPage = Math.min(totalPages, startPage + per_page - 1);
 
-  const handleCheckboxChange = (index) => {
-    // Create a copy of the contacts array to avoid mutating state directly
-    const updatedContacts = [...contacts];
-    updatedContacts[index].checked = !updatedContacts[index].checked;
-    useEffect(() => {
-      dispatch(addContacts(updatedContacts));
-    }, [data]);
-  };
+  const startPageSm = Math.max(1, current_page - Math.floor(per_page / 2));
+  const endPageSm = Math.min(totalPages, startPage + per_page - 4);
 
   const row = contacts
     ?.filter((item) => {
@@ -127,7 +122,7 @@ const ContactTable = () => {
 
       const handleDeleteModal = () => {
         handleGetId(contact?.id);
-        toggleDeleteModal()
+        toggleDeleteModal();
       };
 
       return (
@@ -136,7 +131,7 @@ const ContactTable = () => {
           key={contact?.id}
           className="w-full group/item duration-200 hover:bg-secondary-300 py-3 px-1 p-4 cursor-pointer"
         >
-          <td className="flex sm:w-[350px] justify-start items-center space-x-4 sm:px-3 my-1 md:my-0 py-3 h-[55px]">
+          <td className="flex sm:w-[350px]  justify-start items-center space-x-4 sm:px-3 my-1 md:my-0 py-3 h-[55px]">
             <div
               onClick={(e) => e.stopPropagation()}
               className="hidden group-hover/item:block"
@@ -265,12 +260,12 @@ const ContactTable = () => {
   return (
     <div>
       {contacts ? (
-        <div className="w-[95%]">
+        <div className="w-full md:w-[95%]">
           <div>
             <table className="">
               <thead className="">
                 <tr className="border-b-[1px] border-secondary-200 text-sm font-light text-slate-500 relative">
-                  <th className="text-center font-semibold w-[20%] hidden md:block py-4 ms-4">
+                  <th className="text-center font-semibold w-[25%] hidden md:block py-4 ms-4">
                     Name
                   </th>
                   <th className="text-start font-semibold py-4 w-[380px] md:hidden">
@@ -324,7 +319,7 @@ const ContactTable = () => {
                   <th className="text-start font-semibold w-[20%] hidden md:table-cell">
                     Address
                   </th>
-                  <th className="w-[10%] hidden md:table-cell">
+                  <th className="w-[15%] hidden md:table-cell">
                     <div className="flex items-center space-x-6">
                       <AiFillPrinter className="text-secondary-500 text-xl" />
                       <svg
@@ -365,71 +360,144 @@ const ContactTable = () => {
                   </th>
                 </tr>
               </thead>
+              {/* Mobile Pagination */}
+              <div className="block md:hidden">
+                <div className="w-min mx-auto cus-shadow-sm p-2 rounded-full flex justify-center space-x-3 md:space-x-8 items-center my-2 md:my-6">
+                  <button
+                    onClick={() => selectPageHandler(current_page - 1)}
+                    className={`current_page > 1 ? "" : "hidden" flex items-center text-sm font-bold`}
+                  >
+                    <MdOutlineKeyboardArrowLeft className="text-2xl md:text-xl" />
+                    Prev
+                  </button>
+                  {Array.from({ length: endPageSm - startPageSm }, (_, i) => {
+                    const pageNumber = startPageSm + i;
+                    return (
+                      <>
+                        <span
+                          className={`${
+                            pageNumber === current_page
+                              ? "bg-primary-100 text-white text-xs font-extralight w-6 h-6 flex justify-center items-center rounded-full"
+                              : ""
+                          } cursor-pointer`}
+                          onClick={() => selectPageHandler(pageNumber)}
+                          key={pageNumber}
+                        >
+                          {pageNumber}
+                        </span>
+                      </>
+                    );
+                  })}
+                  {current_page + 5 < data?.contacts?.last_page &&
+                  data?.contacts?.last_page !== current_page ? (
+                    <span>
+                      <BiDotsHorizontalRounded />
+                    </span>
+                  ) : (
+                    <span className="hidden"></span>
+                  )}
 
+                  <span
+                    className={`${
+                      data?.contacts?.last_page === current_page
+                        ? "bg-primary-100 text-white w-6 h-6 flex justify-center items-center rounded-full"
+                        : ""
+                    } cursor-pointer`}
+                    onClick={() => selectPageHandler(data?.contacts?.last_page)}
+                    key={data?.contacts?.last_page}
+                  >
+                    {data?.contacts?.last_page}
+                  </span>
+                  <button
+                    onClick={() => selectPageHandler(current_page + 1)}
+                    className={`current_page < totalPages ? "" : "hidden" flex items-center text-sm font-bold`}
+                  >
+                    Next
+                    <MdOutlineKeyboardArrowRight className="text-2xl md:text-xl" />
+                  </button>
+                </div>
+              </div>
               <p className="text-[10px] text-slate-500 font-bold tracking-widest md:ms-10 ms-5 py-2">
                 CONTACTS ({data?.contacts?.total})
               </p>
 
               <tbody>{row}</tbody>
             </table>
-            {/* <div className="w-[50%] mx-auto flex justify-center ms-16 space-x-4 fixed bottom-0 items-center my-6 mt-auto">
-          <button
-            onClick={() => selectPageHandler(num - 1)}
-            className={num > 1 ? "" : "hidden"}
-          >
-            <CiCircleChevLeft className="text-2xl" />
-          </button>
-          {[...Array(totalPages)].map((_, i) => {
-            return (
-              <span
-                className={`${
-                  num === i + 1
-                    ? "bg-primary-100 text-white px-2 py-1 flex justify-center items-center rounded-full"
-                    : ""
-                } cursor-pointer`}
-                onClick={() => selectPageHandler(i + 1)}
-                key={i}
-              >
-                {i + 1}
-              </span>
-            );
-          })}
-          <button
-            onClick={() => selectPageHandler(num + 1)}
-            className={num < totalPages ? "" : "hidden"}
-          >
-            <CiCircleChevRight className="text-2xl" />
-          </button>
-        </div> */}
-            <div className="w-[90%] md:w-[70%] mx-auto flex justify-center space-x-4 md:space-x-8 fixed -bottom-2 left-4 md:left-[200px] items-center my-6 mt-auto">
-              <button
-                onClick={() => selectPageHandler(current_page - 1)}
-                className={current_page > 1 ? "" : "hidden"}
-              >
-                <CiCircleChevLeft className="text-3xl md:text-2xl" />
-              </button>
-              {Array.from({ length: endPage - startPage + 1 }, (_, i) => {
-                const pageNumber = startPage + i;
-                return (
-                  <span
-                    className={`${
-                      pageNumber === current_page
-                        ? "bg-primary-100 text-white w-8 h-8 md:w-6 md:h-6 flex justify-center items-center rounded-full"
-                        : ""
-                    } cursor-pointer`}
-                    onClick={() => selectPageHandler(pageNumber)}
-                    key={pageNumber}
-                  >
-                    {pageNumber}
+            {/* Pagination */}
+            <div className="hidden md:block">
+              <div className="w-[95%] ms-10 md:w-min cus-shadow-sm p-2 rounded-full flex justify-center space-x-3 md:space-x-8 items-center my-2 md:my-6">
+                <button
+                  onClick={() => selectPageHandler(current_page - 1)}
+                  className={`current_page > 1 ? "" : "hidden" flex items-center text-sm font-bold`}
+                >
+                  <MdOutlineKeyboardArrowLeft className="text-2xl md:text-xl" />
+                  Prev
+                </button>
+                <span
+                  className={`${
+                    current_page === 1
+                      ? "bg-primary-100 text-white w-6 h-6 flex justify-center items-center rounded-full"
+                      : ""
+                  } cursor-pointer`}
+                  onClick={() => selectPageHandler(1)}
+                  key={1}
+                >
+                  {1}
+                </span>
+                {current_page - 5 > 1 && 1 !== current_page ? (
+                  <span>
+                    <BiDotsHorizontalRounded />
                   </span>
-                );
-              })}
-              <button
-                onClick={() => selectPageHandler(current_page + 1)}
-                className={current_page < totalPages ? "" : "hidden"}
-              >
-                <CiCircleChevRight className="text-3xl md:text-2xl" />
-              </button>
+                ) : (
+                  <span className="hidden"></span>
+                )}
+                {Array.from({ length: endPage - startPage - 1 }, (_, i) => {
+                  const pageNumber = startPage + i + 1;
+                  return (
+                    <>
+                      <span
+                        className={`${
+                          pageNumber === current_page
+                            ? "bg-primary-100 text-white text-xs font-semibold w-8 h-8 md:w-6 md:h-6 flex justify-center items-center rounded-full"
+                            : ""
+                        } cursor-pointer`}
+                        onClick={() => selectPageHandler(pageNumber)}
+                        key={pageNumber}
+                      >
+                        {pageNumber}
+                      </span>
+                    </>
+                  );
+                })}
+
+                {current_page + 4 < data?.contacts?.last_page &&
+                data?.contacts?.last_page !== current_page ? (
+                  <span>
+                    <BiDotsHorizontalRounded />
+                  </span>
+                ) : (
+                  <span className="hidden"></span>
+                )}
+
+                <span
+                  className={`${
+                    data?.contacts?.last_page === current_page
+                      ? "bg-primary-100 text-white text-xs w-6 h-6 flex justify-center items-center rounded-full"
+                      : ""
+                  } cursor-pointer`}
+                  onClick={() => selectPageHandler(data?.contacts?.last_page)}
+                  key={data?.contacts?.last_page}
+                >
+                  {data?.contacts?.last_page}
+                </span>
+                <button
+                  onClick={() => selectPageHandler(current_page + 1)}
+                  className={`current_page < totalPages ? "" : "hidden" flex items-center text-sm font-bold`}
+                >
+                  Next
+                  <MdOutlineKeyboardArrowRight className="text-2xl md:text-xl" />
+                </button>
+              </div>
             </div>
           </div>
           {modal && <ChangePasswordModal />}
