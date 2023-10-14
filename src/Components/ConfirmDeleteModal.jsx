@@ -14,7 +14,7 @@ const ConfirmDeleteModal = () => {
   const { toggleDeleteModal, deleteModal, id } = useContext(ToggleContext);
   const { data } = useGetContactQuery(token);
   const [deleteContact] = useDeleteContactMutation();
-  console.log(deleteContact);
+  console.log(id);
 
   const nav = useNavigate();
 
@@ -33,7 +33,7 @@ const ConfirmDeleteModal = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[400px] md:w-[550px] h-[200px] bg-white border border-[#d3d4d7] rounded-lg p-5 flex flex-col justify-center items-start space-y-4"
+        className="w-[90%] md:w-[550px] h-[200px] bg-white border border-[#d3d4d7] rounded-lg p-5 flex flex-col justify-center items-start space-y-4"
       >
         <h6 className="text-lg font-semibold text-start text-gray-800">
           Delete from contacts?

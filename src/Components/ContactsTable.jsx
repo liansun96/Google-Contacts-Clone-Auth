@@ -136,7 +136,7 @@ const ContactTable = () => {
           key={contact?.id}
           className="w-full group/item duration-200 hover:bg-secondary-300 py-3 px-1 p-4 cursor-pointer"
         >
-          <td className="flex sm:w-[350px]  justify-start items-center space-x-4 sm:px-3 my-1 md:my-0 py-3 h-[55px]">
+          <td className="flex sm:w-[350px] justify-start items-center space-x-4 sm:px-3 my-1 md:my-0 py-3 h-[55px]">
             <div
               onClick={(e) => e.stopPropagation()}
               className="hidden group-hover/item:block"
@@ -270,7 +270,7 @@ const ContactTable = () => {
             <table className="">
               <thead className="">
                 <tr className="border-b-[1px] border-secondary-200 text-sm font-light text-slate-500 relative">
-                  <th className="text-center font-semibold w-[25%] hidden md:block py-4 ms-4">
+                  <th className="text-center font-semibold w-[20%] hidden md:block py-4 ms-4">
                     Name
                   </th>
                   <th className="text-start font-semibold py-4 w-[380px] md:hidden">
@@ -324,7 +324,7 @@ const ContactTable = () => {
                   <th className="text-start font-semibold w-[20%] hidden md:table-cell">
                     Address
                   </th>
-                  <th className="w-[15%] hidden md:table-cell">
+                  <th className="w-[10%] hidden md:table-cell">
                     <div className="flex items-center space-x-6">
                       <AiFillPrinter className="text-secondary-500 text-xl" />
                       <svg

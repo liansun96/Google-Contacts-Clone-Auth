@@ -35,7 +35,7 @@
     @apply absolute bg-white cus-shadow-sm w-[250px] rounded-3xl z-20 right-[-30px] top-[45px] text-sm  duration-300 origin-top-right;
   }
   .delete-contact-drop {
-    @apply absolute bg-white cus-shadow-sm w-[250px] rounded-xl z-20 right-[100x] top-[250px] text-sm  duration-300 origin-top-right;
+    @apply absolute bg-white cus-shadow-sm w-[250px] rounded-xl z-20 right-[0px] top-[45px] text-sm  duration-300 origin-top-right;
   }
 
   @media screen and (max-width:600px) {

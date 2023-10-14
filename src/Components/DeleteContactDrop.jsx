@@ -1,10 +1,19 @@
 import React, { useContext } from "react";
-import ChangePasswordModal from "./ChangePasswordModel";
 import { ToggleContext } from "../Context/ToggleProvider";
-import { MdDeleteOutline } from "react-icons/md";
+import { AiFillPrinter } from "react-icons/ai";
 
-const DeleteContactDrop = ({ showDelete, handleShowDelete ,handleDelete , id}) => {
-  const { toggleDeleteModal, deleteModal } = useContext(ToggleContext);
+const DeleteContactDrop = ({ showDelete }) => {
+  const { toggleDeleteModal, handleGetId, id } = useContext(ToggleContext);
+
+  const handleDelete = () => {
+    toggleDeleteModal();
+    handleGetId(id);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
 
   return (
     <div
@@ -15,26 +24,42 @@ const DeleteContactDrop = ({ showDelete, handleShowDelete ,handleDelete , id}) =
       }
     >
       <div className="">
-        <div          
-          className="flex justify-start items-center px-4 py-[11px] gap-2 hover:bg-secondary-300 rounded-t-xl"
-        >
+        <button onClick={handlePrint} className="w-full flex justify-start items-center px-4 py-[11px] gap-2 hover:bg-secondary-300 rounded-t-xl">
+          <AiFillPrinter className="text-secondary-500 text-xl" />
+
+          <p className="font-semibold text-base">Print</p>
+        </button>
+        <div className="flex justify-start items-center px-4 py-[11px] gap-2 hover:bg-secondary-300">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="2em"
-            height="2em"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
+            className="NSy2Hd cdByRd RTiFqe undefined"
           >
             <path
               fill="#686b70"
-              d="M11 12q-1.65 0-2.825-1.175T7 8q0-1.65 1.175-2.825T11 4q1.65 0 2.825 1.175T15 8q0 1.65-1.175 2.825T11 12Zm0-2q.825 0 1.413-.588T13 8q0-.825-.588-1.413T11 6q-.825 0-1.413.588T9 8q0 .825.588 1.413T11 10Zm4 10H5q-.825 0-1.413-.588T3 18v-.775q0-.85.425-1.575t1.175-1.1q1.275-.65 2.888-1.1T11 13q.525 0 1.025.038t1 .112q.025.575.138 1.1t.387 1.025q-.575-.125-1.213-.2T11 15q-1.8 0-3.2.438t-2.3.887q-.25.125-.375.375T5 17.225V18h10v2Zm4.7-.65l-1.05 1.2q-.15.175-.388.175t-.387-.175l-.65-.775q-.125-.125-.175-.3t-.05-.35v-3.3q-.875-.325-1.438-1.087T15 13q0-1.25.875-2.125T18 10q1.25 0 2.125.875T21 13q0 .975-.563 1.738T19 15.825V16l.65.65q.15.15.15.35t-.15.35L19 18l.675.675q.125.125.138.325t-.113.35ZM18 14.5q.625 0 1.063-.438T19.5 13q0-.625-.438-1.063T18 11.5q-.625 0-1.063.438T16.5 13q0 .625.438 1.063T18 14.5ZM11 8h-.013H11Zm0 10Z"
+              d="M4 15h2v3h12v-3h2v3c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2m4.41-7.59L11 7.83V16h2V7.83l2.59 2.59L17 9l-5-5-5 5 1.41 1.41z"
             ></path>
+          </svg>
+
+          <p className="font-semibold text-base">Export</p>
+        </div>
+        <div className="flex justify-start items-center px-4 py-[11px] gap-2 hover:bg-secondary-300">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#686b70">
+            <path fill="none" d="M0 0h24v24H0V0z"></path>
+            <path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.81.97H5.44l.8-.97zM5 19V8h14v11H5zm8.45-9h-2.9v3H8l4 4 4-4h-2.55z"></path>
           </svg>
 
           <p className="font-semibold text-base">Hide from contacts</p>
         </div>
-        <button onClick={toggleDeleteModal} className="w-full flex justify-start items-center px-4 py-[11px] gap-2 hover:bg-secondary-300 rounded-b-xl">
-          <MdDeleteOutline className="text-xl text-secondary-500" />
-
+        <button
+          onClick={handleDelete}
+          className="w-full flex justify-start items-center px-4 py-[11px] gap-2 hover:bg-secondary-300 rounded-b-xl"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#686b70">
+            <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
+            <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+          </svg>
           <p className="font-semibold text-base ps-1">Delete</p>
         </button>
       </div>

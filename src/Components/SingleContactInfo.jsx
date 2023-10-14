@@ -26,6 +26,7 @@ import DeleteContactDrop from "./DeleteContactDrop";
 import toast, { Toaster } from "react-hot-toast";
 import { ToggleContext } from "../Context/ToggleProvider";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import ChangePasswordModal from "./ChangePasswordModel";
 
 const SingleContactInfo = () => {
   const token = Cookies.get("token");
@@ -33,16 +34,16 @@ const SingleContactInfo = () => {
   const { data: contact } = useGetSingleContactQuery({ id, token });
   console.log(contact);
 
-  const { toggleDeleteModal, deleteModal } = useContext(ToggleContext);
+  const { modal, deleteModal ,handleGetId } = useContext(ToggleContext);
 
   const [deleteContact] = useDeleteContactMutation();
 
   const notify = () => toast("Successfully deleted.");
-  const handleDelete = () => {
-    deleteContact({ id: id, token });
-    toggleDeleteModal();
-    notify();
-  };
+  // const handleDelete = () => {
+  //   deleteContact({ id: id, token });
+  //   toggleDeleteModal();
+  //   notify();
+  // };
 
   const favContacts = useSelector(
     (state) => state.favoriteContactSlice.favContacts
@@ -97,6 +98,12 @@ const SingleContactInfo = () => {
     }
   };
 
+  const handleDelete = () => {
+    handleShowDelete();
+    handleGetId(contact?.contact?.id);
+  };
+
+  console.log(contact?.contact?.id);
   return (
     <div className="w-[100%] md:px-10">
       <div className="relative">
@@ -148,7 +155,7 @@ const SingleContactInfo = () => {
               </div>
               <div ref={showDeleteRef}>
                 <button
-                  onClick={handleShowDelete}
+                  onClick={handleDelete}
                   className="w-10 h-10 rounded-full hover:bg-slate-200 flex items-center justify-center"
                 >
                   <svg
@@ -162,10 +169,8 @@ const SingleContactInfo = () => {
                     <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
                   </svg>
                   <DeleteContactDrop
-                    id={id}
-                    handleDelete={handleDelete}
-                    showDelete={showDelete}
-                    handleShowDelete={handleShowDelete}
+                    id={id}                    
+                    showDelete={showDelete}                    
                   />
                 </button>
               </div>
@@ -221,9 +226,9 @@ const SingleContactInfo = () => {
                 </span>
               )}
             </div>
-            <div ref={showDeleteRef}>
+            <div className="relative" ref={showDeleteRef}>
               <button
-                onClick={handleShowDelete}
+                onClick={handleDelete}
                 className="w-10 h-10 rounded-full hover:bg-slate-200 flex items-center justify-center"
               >
                 <svg
@@ -236,11 +241,9 @@ const SingleContactInfo = () => {
                   <path fill="none" d="M0 0h24v24H0V0z"></path>
                   <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
                 </svg>
-                <DeleteContactDrop
-                  id={id}
-                  handleDelete={handleDelete}
-                  showDelete={showDelete}
-                  handleShowDelete={handleShowDelete}
+                <DeleteContactDrop                  
+                  
+                  showDelete={showDelete}                  
                 />
               </button>
             </div>
@@ -324,6 +327,7 @@ const SingleContactInfo = () => {
           },
         }}
       />
+      {modal && <ChangePasswordModal />}
       {deleteModal && <ConfirmDeleteModal />}
     </div>
   );

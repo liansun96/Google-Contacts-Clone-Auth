@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import userProfile from "../images/user-profile.png";
 import { TbAddressBook, TbCameraPlus } from "react-icons/tb";
 import { HiOutlineUser, HiOutlineMail } from "react-icons/hi";
@@ -9,11 +9,16 @@ import { useCreateContactMutation } from "../redux/api/contactApi";
 import { useNavigate } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
 import toast, { Toaster } from "react-hot-toast";
+import ChangePasswordModal from "./ChangePasswordModel";
+import { ToggleContext } from "../Context/ToggleProvider";
 
 const CreateContact = () => {
   const token = Cookies.get("token");
   const [createContact, { isLoading, isError, error }] =
     useCreateContactMutation(token);
+
+  const { modal } = useContext(ToggleContext);
+
   const nav = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -159,6 +164,7 @@ const CreateContact = () => {
           />
         </div>
       </div>
+      {modal && <ChangePasswordModal />}
     </form>
   );
 };
