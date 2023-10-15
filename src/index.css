@@ -19,6 +19,10 @@
     box-shadow: rgba(0, 0, 0, 0.148) 0px 3px 8px;
   }
 
+  .cus-shadow-md{
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  }
+
   .cus-shadow-lg {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }

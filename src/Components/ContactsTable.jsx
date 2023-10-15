@@ -80,6 +80,7 @@ const ContactTable = () => {
 
   const per_page = data?.contacts?.per_page; // Number of page numbers to display per page
   const current_page = data?.contacts?.current_page; // Current page number
+  const last_page = data?.contacts?.last_page; // Last page number
 
   const startPage = Math.max(1, current_page - Math.floor(per_page / 2));
   const endPage = Math.min(totalPages, startPage + per_page - 1);
@@ -365,31 +366,52 @@ const ContactTable = () => {
                 <div className="w-min mx-auto cus-shadow-sm p-2 rounded-full flex justify-center space-x-3 md:space-x-8 items-center my-2 md:my-6">
                   <button
                     onClick={() => selectPageHandler(current_page - 1)}
-                    className={`current_page > 1 ? "" : "hidden" flex items-center text-sm font-bold`}
+                    className={`${current_page > 1 ? "" : "hidden"} group flex items-center text-xs font-bold duration-300 hover:scale-110`}
                   >
-                    <MdOutlineKeyboardArrowLeft className="text-2xl md:text-xl" />
+                    <MdOutlineKeyboardArrowLeft className="text-lg group-hover:translate-x-1 duration-200" />
                     Prev
                   </button>
-                  {Array.from({ length: endPageSm - startPageSm }, (_, i) => {
-                    const pageNumber = startPageSm + i;
-                    return (
-                      <>
-                        <span
-                          className={`${
-                            pageNumber === current_page
-                              ? "bg-primary-100 text-white text-xs font-extralight w-6 h-6 flex justify-center items-center rounded-full"
-                              : ""
-                          } cursor-pointer`}
-                          onClick={() => selectPageHandler(pageNumber)}
-                          key={pageNumber}
-                        >
-                          {pageNumber}
-                        </span>
-                      </>
-                    );
-                  })}
-                  {current_page + 5 < data?.contacts?.last_page &&
-                  data?.contacts?.last_page !== current_page ? (
+                  <span
+                    className={`${
+                      current_page === 1
+                        ? "bg-primary-100 text-white w-6 h-6 flex justify-center items-center rounded-full"
+                        : ""
+                    } cursor-pointer`}
+                    onClick={() => selectPageHandler(1)}
+                    key={1}
+                  >
+                    {1}
+                  </span>
+                  {current_page - 5 > 1 && 1 !== current_page ? (
+                    <span>
+                      <BiDotsHorizontalRounded />
+                    </span>
+                  ) : (
+                    <span className="hidden"></span>
+                  )}
+                  {Array.from(
+                    { length: endPageSm - startPageSm - 1 },
+                    (_, i) => {
+                      const pageNumber = startPageSm + i + 1;
+                      return (
+                        <>
+                          <span
+                            className={`${
+                              pageNumber === current_page
+                                ? "bg-primary-100 text-white text-xs font-extralight w-6 h-6 flex justify-center items-center rounded-full"
+                                : ""
+                            } cursor-pointer`}
+                            onClick={() => selectPageHandler(pageNumber)}
+                            key={pageNumber}
+                          >
+                            {pageNumber}
+                          </span>
+                        </>
+                      );
+                    }
+                  )}
+                  {current_page + 5 < last_page &&
+                  last_page !== current_page ? (
                     <span>
                       <BiDotsHorizontalRounded />
                     </span>
@@ -399,21 +421,21 @@ const ContactTable = () => {
 
                   <span
                     className={`${
-                      data?.contacts?.last_page === current_page
+                      last_page === current_page
                         ? "bg-primary-100 text-white w-6 h-6 flex justify-center items-center rounded-full"
                         : ""
                     } cursor-pointer`}
-                    onClick={() => selectPageHandler(data?.contacts?.last_page)}
-                    key={data?.contacts?.last_page}
+                    onClick={() => selectPageHandler(last_page)}
+                    key={last_page}
                   >
-                    {data?.contacts?.last_page}
+                    {last_page}
                   </span>
                   <button
                     onClick={() => selectPageHandler(current_page + 1)}
-                    className={`current_page < totalPages ? "" : "hidden" flex items-center text-sm font-bold`}
+                    className={`${current_page < totalPages ? "" : "hidden"} group flex items-center text-xs font-bold duration-300 hover:scale-110`}
                   >
                     Next
-                    <MdOutlineKeyboardArrowRight className="text-2xl md:text-xl" />
+                    <MdOutlineKeyboardArrowRight className="text-lg group-hover:-translate-x-1 duration-200" />
                   </button>
                 </div>
               </div>
@@ -428,9 +450,9 @@ const ContactTable = () => {
               <div className="w-[95%] ms-10 md:w-min cus-shadow-sm p-2 rounded-full flex justify-center space-x-3 md:space-x-8 items-center my-2 md:my-6">
                 <button
                   onClick={() => selectPageHandler(current_page - 1)}
-                  className={`current_page > 1 ? "" : "hidden" flex items-center text-sm font-bold`}
+                  className={`${current_page > 1 ? "" : "hidden"} group flex items-center text-sm font-bold`}
                 >
-                  <MdOutlineKeyboardArrowLeft className="text-2xl md:text-xl" />
+                  <MdOutlineKeyboardArrowLeft className="text-2xl md:text-xl group-hover:translate-x-1 duration-200" />
                   Prev
                 </button>
                 <span
@@ -470,8 +492,7 @@ const ContactTable = () => {
                   );
                 })}
 
-                {current_page + 4 < data?.contacts?.last_page &&
-                data?.contacts?.last_page !== current_page ? (
+                {current_page + 4 < last_page && last_page !== current_page ? (
                   <span>
                     <BiDotsHorizontalRounded />
                   </span>
@@ -481,21 +502,21 @@ const ContactTable = () => {
 
                 <span
                   className={`${
-                    data?.contacts?.last_page === current_page
+                    last_page === current_page
                       ? "bg-primary-100 text-white text-xs w-6 h-6 flex justify-center items-center rounded-full"
                       : ""
                   } cursor-pointer`}
-                  onClick={() => selectPageHandler(data?.contacts?.last_page)}
-                  key={data?.contacts?.last_page}
+                  onClick={() => selectPageHandler(last_page)}
+                  key={last_page}
                 >
-                  {data?.contacts?.last_page}
+                  {last_page}
                 </span>
                 <button
                   onClick={() => selectPageHandler(current_page + 1)}
-                  className={`current_page < totalPages ? "" : "hidden" flex items-center text-sm font-bold`}
+                  className={`${current_page < totalPages ? "" : "hidden"} group flex items-center text-sm font-bold`}
                 >
                   Next
-                  <MdOutlineKeyboardArrowRight className="text-2xl md:text-xl" />
+                  <MdOutlineKeyboardArrowRight className="text-2xl md:text-xl group-hover:-translate-x-1 duration-200" />
                 </button>
               </div>
             </div>
