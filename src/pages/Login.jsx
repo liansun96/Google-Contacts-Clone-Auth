@@ -38,7 +38,7 @@ const Login = () => {
   };
   return (
     <div className="flex justify-center items-center h-screen w-full">
-      <div className="rounded-lg w-[450px] h-[500px] border shadow-lg p-9">
+      <div className="rounded-lg w-[450px] h-[500px] border p-9">
         <form onSubmit={loginHandler} className="flex flex-col gap-5">
           <div className="flex items-center justify-center w-full h-full">
             <svg
