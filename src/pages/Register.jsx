@@ -36,8 +36,8 @@ const Register = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen w-full">
-      <div className="rounded w-[450px]  border  p-9">
+    <div className="flex justify-center items-center h-screen w-full p-1">
+      <div className="rounded w-full lg:w-[450px] border p-5 lg:p-9">
         <form onSubmit={registerHandler} className="flex flex-col gap-5">
           <div className="flex items-center justify-center w-full h-full">
             <svg

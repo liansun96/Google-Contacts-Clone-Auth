@@ -37,8 +37,8 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen w-full">
-      <div className="rounded-lg w-[450px] h-[500px] border p-9">
+    <div className="flex justify-center items-center h-screen w-full p-1">
+      <div className="rounded-lg w-full lg:w-[450px] h-[500px] border p-5 lg:p-9">
         <form onSubmit={loginHandler} className="flex flex-col gap-5">
           <div className="flex items-center justify-center w-full h-full">
             <svg
@@ -96,7 +96,7 @@ const Login = () => {
               />
               {<p className="text-red-500 text-sm">{invalidEmail}</p>}
             </div>
-            <div className="">
+            <div className="relative">
               <input
                 onChange={(e) => {
                   setPassword(e.target.value);
